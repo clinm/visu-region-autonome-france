@@ -8,7 +8,7 @@
 
         //globals
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
-            width = 1200 - margin.left - margin.right,
+            width = 900 - margin.left - margin.right,
             height = 700 - margin.top - margin.bottom,
             header = 20,
             innerheight = height - header,
@@ -124,6 +124,24 @@
                 .attr("x", (metricwidth * idx));
             }
 
+            var lineHeader = d3.select("body")
+            .append("svg")
+            .classed("titleHeader", true)
+            .selectAll('.lineHeader')
+            .data(dataset[0].regions)
+            .enter()
+            .append("text")
+            .classed("lineHeader", true)
+            .attr("x", function(d, idx){
+                return 0;
+            })
+            .attr("y", function(d, idx){
+                return header + (innerheight / dataset[0].regions.length) * (idx + 1);
+            })
+            .text(function(d,i){
+                return "#" + (i+1) + "  " + d.name
+            })
+            
             var svg = d3.select("body")
             .append("svg")
             .attr("class","viz")
@@ -184,14 +202,14 @@
             .data(lookup)
             .enter()
             .append("path")
-            .attr("class",function(d){ return d.metric+'_line'}) // use class attr to add login to class assignment
+            .attr("class",function(d){ return d.metric.replace(/\s/g,'')+'_line'}) // use class attr to add login to class assignment
             .classed("line", true) // add additional classes with classed
             .classed("line-no-accent", true)
             // call path function on data, passing in array length for y measure
             .attr("d",function(d,i){return pathfunction({len:lookup.length,data:d.data})})
-            .on("mouseover", function(d){mouseOver(d.metric)})
-            .on("mouseout", function(d){mouseOut(d.metric)})
-            .on("click", function(d){click(d.metric)})
+            .on("mouseover", function(d){mouseOver(d.metric.replace(/\s/g,''))})
+            .on("mouseout", function(d){mouseOut(d.metric.replace(/\s/g,''))})
+            .on("click", function(d){click(d.metric.replace(/\s/g,''))})
 
             // pull put keys only for headers
             var keys = [];
@@ -217,21 +235,23 @@
             .on("click", function(d,i){
                 rectSlide(i);
             })
+            
             var textGroup = svg
             .selectAll("textgroup")
             .data(dataset)
             .enter()
             .append("g");
-
+            
             textGroup
             .each(function(record,i){
+
                 var metric = d3.select(this)
                 .selectAll("text")
                 .data(record.regions)
                 .enter()
                 .append("text")
                 .attr('class',function(d, idx){
-                    return d.name + '_text';})
+                    return d.name.replace(/\s/g,'') + '_text';})
                 .classed('label', true)
                 .classed("label-no-accent", true)
                 .attr("x", function(d, idx){
@@ -247,13 +267,14 @@
                 .text(function(d, idx){
                     var rank = idx + 1;
                     if (d.diff != null) {
-                        return '#' + String(rank) + ' ' + d.name + ' (' + String( Math.round( d.diff * 100 ) / 100 ) + ')'
+                        return '#' + String(rank)
                     }
                 })
                 .on("mouseover", function(d){mouseOver(d.year)})
                 .on("mouseout", function(d){mouseOut(d.year)})
                 .on("click", function(d){click(d.year)})
                 })
+            
         }
     </script>
 </body>

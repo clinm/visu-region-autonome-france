@@ -1,37 +1,60 @@
 body {
-font-family: "Helvetica Neue", Helvetica, sans-serif;
-font: 10px;
-background-color: #bbb;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
 }
+
 .viz {
-margin-left: 20px;
 }
+
+.titleHeader{
+    width: 270px;
+    height: 800px;
+}
+
 .headertext {
-text-transform: uppercase;
-font-size: 16px;
-fill: black;
+    text-transform: uppercase;
+    font-size: 16px;
+    fill: black;
 }
+
 .line {
-stroke: #666;
-stroke-width: 2;
-fill: none;
+    stroke: #666;
+    stroke-width: 2;
+    fill: none;
 }
+
 .line-accent {
-stroke: cornflowerblue;
-stroke-width: 4;
-fill: none;
+    stroke: cornflowerblue;
+    stroke-width: 4;
+    fill: none;
 }
+
 .label {
-font-size: 16px;
-fill: #bbb;
+    font-size: 12px;
+    fill: #bbb;
 }
+
 .label-accent {
-font-size: 20px;
-fill: cornflowerblue;
+    font-size: 13px;
+    fill: cornflowerblue;
+    display: block;
 }
+
+.label-no-accent {
+    display: none;
+}
+
 .headertext:hover{
-text-decoration: underline;
+    text-decoration: underline;
 }
+
 .label, .line , .headertext{
-cursor: pointer;
+    cursor: pointer;
+}
+
+.lineHeader {
+    font-size: 13px;
 }
