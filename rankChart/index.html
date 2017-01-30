@@ -8,7 +8,7 @@
 
         //globals
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
-            width = 700 - margin.left - margin.right,
+            width = 1200 - margin.left - margin.right,
             height = 700 - margin.top - margin.bottom,
             header = 15,
             innerheight = height - header,
@@ -16,11 +16,12 @@
             dataset;
 
         // pull in the data
-        var datasource = d3.json("rankdata2.json",function(error,data){
+        var datasource = d3.json("../datasource/prod_totale_petrole.csv",function(error,data){
             if (error) return console.warn(error);
-            dataset = data.ranking_values;
+            dataset = data;
             
             dataset = orderByRank(dataset)
+            dataset = orderByDescendingYear(dataset)
             // build the chart once the data are loaded
             buildChart();
         });
@@ -32,6 +33,13 @@
                 })
             })
             return data;
+        }
+        
+        function orderByDescendingYear(data){
+            data.sort(function(a,b){
+                return b.year-a.year
+            })
+            return data
         }
         
         function buildChart(){
@@ -135,7 +143,7 @@
             // loop first record to get technology list
             metriclist.forEach(function(rec,idx){
                 var o = {};
-                o.metric = rec.id;
+                o.metric = rec.name;
                 o.data = [];
                 lookup.push(o);
             })
@@ -143,7 +151,7 @@
             //Assign to each region his rank for each year 
             dataset.forEach(function(record,index){
 
-                var metric = record.annee;
+                var metric = record.year;
                 var vals = record.regions;
                 
                 //
@@ -152,9 +160,9 @@
                     // loop the tech list lookup
                     lookup.forEach(function(r,i){
                         // if we have a match...
-                        if ( r.metric == rec.id ){
+                        if ( r.metric == rec.name ){
                             // make sure it's not null...
-                            if (rec.value != null) {
+                            if (rec.diff != null) {
                                 // add the index number to the lokup -- this gives us the rank order, as the original data are loaded ascending
                                 lookup[i].data[index] = idx;
                                 // if null...
@@ -187,7 +195,7 @@
             // pull put keys only for headers
             var keys = [];
             dataset.forEach(function(record, idx){
-                keys.push(record.annee)
+                keys.push(record.year)
             })
             
             var headerText = svg
@@ -224,7 +232,7 @@
                 .enter()
                 .append("text")
                 .attr('class',function(d, idx){
-                    return d.id + '_text';})
+                    return d.name + '_text';})
                 .classed('label', true)
                 .classed("label-no-accent", true)
                 .attr("x", function(d, idx){
@@ -239,13 +247,13 @@
                 })
                 .text(function(d, idx){
                     var rank = idx + 1;
-                    if (d.value != null) {
-                        return '#' + String(rank) + ' ' + d.id + ' (' + String( Math.round( d.value * 100 ) / 100 ) + ')'
+                    if (d.diff != null) {
+                        return '#' + String(rank) + ' ' + d.name + ' (' + String( Math.round( d.diff * 100 ) / 100 ) + ')'
                     }
                 })
-                .on("mouseover", function(d){mouseOver(d.annee)})
-                .on("mouseout", function(d){mouseOut(d.annee)})
-                .on("click", function(d){click(d.annee)})
+                .on("mouseover", function(d){mouseOver(d.year)})
+                .on("mouseout", function(d){mouseOut(d.year)})
+                .on("click", function(d){click(d.year)})
                 })
         }
     </script>
