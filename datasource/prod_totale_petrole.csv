@@ -1,0 +1,25 @@
+Lieu	N° région, département	Série	Unité	1990	1992	1995	1997	1999	2002	2004	2005	2006	2007	2008	2009
+ALSACE	42	EN18Production totale d'électricité primaire nette	ktep	3008.0	2615.0	3758.0	3824.0	3971.0	3243.0	3405.0	3679.0	3693.0	3137.0	3349.0	2902.0
+AQUITAINE	72	EN18Production totale d'électricité primaire nette	ktep	6617.0	6287.0	6972.0	7298.0	6507.0	6975.0	6731.0	6669.0	7037.0	7148.0	7379.0	5695.0
+AUVERGNE	83	EN18Production totale d'électricité primaire nette	ktep	483.0	175.0	165.0	115.0	162.0	116.0	150.0	115.0	133.0	154.0	176.0	135.0
+BASSE NORMANDIE	25	EN18Production totale d'électricité primaire nette	ktep	4129.0	4506.0	4553.0	4215.0	4681.0	4339.0	4722.0	4900.0	4670.0	4609.0	2887.0	4313.0
+BOURGOGNE	26	EN18Production totale d'électricité primaire nette	ktep	29.0	9.0	13.0	9.0	12.0	10.0	9.0	9.0	10.0	10.0	13.0	8.0
+BRETAGNE	53	EN18Production totale d'électricité primaire nette	ktep	218.0	53.0	56.0	52.0	65.0	52.0	49.0	49.0	72.0	90.0	97.0	112.0
+CENTRE-VAL DE LOIRE	24	EN18Production totale d'électricité primaire nette	ktep	19229.0	20691.0	19960.0	20846.0	19150.0	20808.0	20712.0	20345.0	20231.0	20070.0	20334.0	18506.0
+CHAMPAGNE-ARDENNE	21	EN18Production totale d'électricité primaire nette	ktep	4107.0	4468.0	4149.0	7228.0	8213.0	9609.0	9857.0	9517.0	10178.0	11117.0	10407.0	8122.0
+CORSE	94	EN18Production totale d'électricité primaire nette	ktep	80.0	34.0	25.0	32.0	39.0	24.0	36.0	27.0	33.0	25.0	46.0	44.0
+FRANCHE COMTE	43	EN18Production totale d'électricité primaire nette	ktep	65.0	77.0	88.0	67.0	91.0	74.0	66.0	61.0	70.0	78.0	78.0	53.0
+HAUTE NORMANDIE	23	EN18Production totale d'électricité primaire nette	ktep	8881.0	11231.0	13660.0	13683.0	14320.0	12747.0	12862.0	13903.0	14046.0	11968.0	15002.0	12334.0
+ILE DE FRANCE	11	EN18Production totale d'électricité primaire nette	ktep	0.0	3.0	8.0	7.0	5.0	187.0	366.0	383.0	372.0	379.0	439.0	327.0
+LANGUEDOC-ROUSSILLON	91	EN18Production totale d'électricité primaire nette	ktep	166.0	225.0	204.0	200.0	232.0	187.0	366.0	383.0	372.0	379.0	439.0	327.0
+LIMOUSIN	74	EN18Production totale d'électricité primaire nette	ktep	138.0	198.0	197.0	143.0	220.0	148.0	175.0	132.0	169.0	191.0	209.0	137.0
+LORRAINE	41	EN18Production totale d'électricité primaire nette	ktep	4855.0	8931.0	8937.0	9711.0	9344.0	9544.0	9299.0	9932.0	8871.0	9705.0	9138.0	8817.0
+MIDI-PYRENEES	73	EN18Production totale d'électricité primaire nette	ktep	1168.0	2877.0	4985.0	5713.0	5709.0	5773.0	5135.0	5631.0	5411.0	5799.0	5300.0	5949.0
+NORD-PAS-DE-CALAIS	31	EN18Production totale d'électricité primaire nette	ktep	9688.0	9460.0	10192.0	9647.0	9440.0	9233.0	10086.0	9947.0	10004.0	9700.0	9827.0	9715.0
+PAYS DE LA LOIRE	52	EN18Production totale d'électricité primaire nette	ktep	1.0	2.0	2.0	1.0	2.0	2.0	1.0	1.0	6.0	17.0	24.0	38.0
+PICARDIE	22	EN18Production totale d'électricité primaire nette	ktep	1.0	1.0	1.0	1.0	1.0	1.0	1.0	1.0	14.0	30.0	47.0	90.0
+POITOU-CHARENTES	54	EN18Production totale d'électricité primaire nette	ktep	9.0	11.0	12.0	11.0	3649.0	4961.0	5997.0	5025.0	5602.0	4960.0	5542.0	5184.0
+PROVENCE-ALPES-COTE D AZUR	93	EN18Production totale d'électricité primaire nette	ktep	721.0	1087.0	1140.0	1096.0	998.0	801.0	829.0	634.0	740.0	725.0	799.0	905.0
+RHONE-ALPES	82	EN18Production totale d'électricité primaire nette	ktep	24288.0	21545.0	25830.0	25032.0	25407.0	25529.0	26535.0	25931.0	25790.0	24965.0	24243.0	24241.0
+Producteurs : MEEM (CGDD/SOeS), DREAL (Direction régionale de l'environnement, de l'aménagement et du logement).
+Source .
