@@ -5,7 +5,8 @@ var settings = {
     h: 600,
     wAxeY: 100,
     hAxeX: 200,
-    containerId: "#chart-container"
+    containerId: "#chart-container",
+    sorted: false
 };
 
 var conf;
@@ -34,6 +35,8 @@ function barChart(data, settings){
     var wAxeY = settings.wAxeY;
     var hAxeX = settings.hAxeX;
     var displayValue = settings.displayValue;
+
+    data = data.sort(sortChoice(settings.sorted));
 
     var yDomain = d3.extent(data, function(d){ return d[displayValue] });
     
@@ -64,9 +67,9 @@ function barChart(data, settings){
     var key = function(d){return d.name};
 
     //Initialize state of chart according to drop down menu
-    var state = d3.selectAll("option");
+
     var svg = d3.select(settings.containerId).select("#chart");
-    //Create barchart
+    //Create bar chart
 
     var barPositionPipeline = function(selection) {
         selection.attr("class", function(d){return d[displayValue] < 0 ? "negative" : "positive";})
@@ -109,13 +112,14 @@ function barChart(data, settings){
     }
 
     var xAxisDom = svg.select(".x-axis");
+    var labels;
     if (xAxisDom.size()) {
-        var labels = xAxisDom
+        labels = xAxisDom
             .attr("transform", "translate(0, "+ yScale(0) + ")")
             .call(xAxis)
             .selectAll("text");
     } else {
-        var labels = svg.append("g")
+        labels = svg.append("g")
             .attr("class", "x-axis")
             .attr("transform", "translate(0, "+ yScale(0) + ")")
             .call(xAxis)
@@ -138,35 +142,10 @@ function barChart(data, settings){
     labels.filter(function(d, i) { return !isPositive(i); })
         .style("text-anchor", "start")
         .attr("dx", 10);
-    //Sort data when sort is checked
-    d3.selectAll(".checkbox").
-    on("change", function(){
-        var x0 = xScale.domain(data.sort(sortChoice())
-            .map(function(d){return d.name}))
-            .copy();
-
-        var transition = svg.transition().duration(750);
-        var delay = function(d, i){return i*10;};
-
-        transition.selectAll("rect")
-            .delay(delay)
-            .duration(500)
-            .attr("x", function(d){return x0(d.name);});
-
-
-        svg.select('.x-axis').selectAll('.tick')
-            .transition()
-            .delay(delay)
-            .duration(500)
-            .attr("transform", function(d){ return "translate("+ (x0(d) + (x0.bandwidth() / 2)) + ", 0)";});
-    });
 
     //Function to sort data when sort box is checked
-    function sortChoice(){
-        var state = d3.selectAll("option");
-        var sort = d3.select(".checkbox");
-
-        if (sort.node().checked) {
+    function sortChoice(sorted){
+        if (sorted) {
             return function(a,b){return b[displayValue] - a[displayValue];};
         } else {
             return function(a,b){return d3.ascending(a.name, b.name);};
@@ -189,4 +168,14 @@ d3.json("diff.json", function(error,data){
         createChart(conf);
         barChart(data[1]["regions"], conf);
     }
+
+    $('input[name="choice"]').on('change', function() {
+        conf.displayValue = $(this).attr('value');
+        barChart(data[1]["regions"], conf);
+    });
+
+    $('.checkbox').on('change', function() {
+        conf.sorted = $(this).is(':checked');
+        barChart(data[1]["regions"], conf);
+    });
 });
