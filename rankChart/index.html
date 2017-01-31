@@ -16,6 +16,7 @@
             linePadding = 20,
             dataset,
             lookup,
+            value = "diff",
             negativeColor = "rgb(255,0,0)",
             positiveColor = "rgb(0,255,0)";
         
@@ -37,7 +38,7 @@
                 var o = {};
                 o.metric = rec.name;
                 o.data = [];
-                o.diff = rec.diff
+                o[value] = rec[value]
                 lookup.push(o);
             })
             
@@ -47,7 +48,7 @@
             // build TOP
             makeTOP();
             
-            // add colors to lines compare to diff value
+            // add colors to lines compare to compared value
             colorizedLines()
         });
         // ---------------------------------
@@ -57,7 +58,7 @@
         function orderByRank(data){
             data.forEach(function(oneYear, index){
                 oneYear.regions.sort(function(a, b){
-                    return b.diff-a.diff
+                    return b[value]-a[value]
                 })
             })
             return data;
@@ -138,19 +139,19 @@
             .attr("x2", "100%")
             .attr("y2", "0%")
 
-            //Create array with regions and diff value
+            //Create array with regions and compared value
             var regionsWithCurrentDiff = [];
             dataset[0].regions.forEach(function(d,i){
                 var obj = {}
                 obj.name = d.name
-                obj.diff = d.diff
+                obj[value] = d[value]
                 regionsWithCurrentDiff.push(obj)
             })
 
             //Create first color of each line
             regionsWithCurrentDiff.forEach(function(r, i){
 
-                if (r.diff<0)
+                if (r[value]<0)
                     colorDefs.filter(function(line, l){
                         if (line.metric==r.name)
                             return true
@@ -182,7 +183,7 @@
                         // if we have a match...
                         if ( r.metric == region.name ){
 
-                            if (region.diff < 0 && regionsWithCurrentDiff[k].diff >=0){
+                            if (region[value] < 0 && regionsWithCurrentDiff[k][value] >=0){
 
                                 var def = colorDefs.filter(function(line, l){
                                     if (r.metric==line.metric)
@@ -195,10 +196,10 @@
 
                                 def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", negativeColor)
 
-                                regionsWithCurrentDiff[k].diff = region.diff
+                                regionsWithCurrentDiff[k][value] = region[value]
                             }
                             else{
-                                if (region.diff >= 0 && regionsWithCurrentDiff[k].diff < 0){
+                                if (region[value] >= 0 && regionsWithCurrentDiff[k][value] < 0){
 
                                     var def = colorDefs.filter(function(line, l){
                                         if (r.metric==line.metric)
@@ -211,7 +212,7 @@
                                     
                                     def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", positiveColor)
 
-                                    regionsWithCurrentDiff[k].diff = region.diff
+                                    regionsWithCurrentDiff[k][value] = region[value]
                                 }
                             }
 
@@ -309,14 +310,14 @@
                     })
                     .text(function(d, idx){
                         var rank = idx + 1;
-                        if (d.diff != null) {
+                        if (d[value] != null) {
                             return '#' + String(rank)
                         }
                     })
                     .on("mouseover", function(d){mouseOver(d.name.replace(/\s/g,''))})
                     .on("mouseout", function(d){mouseOut(d.name.replace(/\s/g,''))})
                     .on("click", function(d){click(d.name.replace(/\s/g,''))})
-                    })
+                })
             }
 
             function buildYearText(){
@@ -384,7 +385,7 @@
                             // if we have a match...
                             if ( r.metric == rec.name ){
 
-                                if (rec.diff != null) {
+                                if (rec[value] != null) {
                                     lookup[i].data[index] = idx;
 
                                 } else {
