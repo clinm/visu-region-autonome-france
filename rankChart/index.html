@@ -72,13 +72,13 @@
         }
         
         function setTOPTitle(selector){
-            selector.text(function(year, i){
+            return selector.text(function(year, i){
                 return "Classement "+year.year
             })
         }
         
         function setRankText(selector){
-            selector.text(function(d,i){
+            return selector.text(function(d,i){
                 return "#" + (i+1) + "  " + d.name                
             })
         }
@@ -118,7 +118,7 @@
         function colorizedLines(){
             
             function linearGradient(selector, percentage, color){
-                selector.append("stop")
+                return selector.append("stop")
                 .attr("offset", percentage)
                 .attr("style", "stop-color:"+color+";stop-opacity:1")
             }
@@ -411,7 +411,6 @@
                 .attr("fill","white")
             }
             
-
             function buildLineHeader(){
                 var lineHeader = d3.select("body")
                 .append("svg")
