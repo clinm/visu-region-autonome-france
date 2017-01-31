@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <body>
     <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script src="object-watch.js"></script>
     <script>
         // ---------------------------------
         // -------- CONFIGURATION ----------
@@ -16,15 +17,19 @@
             linePadding = 20,
             dataset,
             lookup,
+            metricwidth,
             indexCurrentYear,
             value = "diff",
             negativeColor = "rgb(255,0,0)",
             positiveColor = "rgb(0,255,0)",
-            currentYear = "2008";
+            conf = {
+                currentYear: "2008"
+            };
         
         // ---------------------------------
         // --------------- MAIN ------------
         // ---------------------------------
+        
         var datasource = d3.json("data.json",function(error,data){
             if (error) return console.warn(error);
             dataset = data;
@@ -33,8 +38,9 @@
             dataset = orderByRank(dataset)
             //dataset = orderByDescendingYear(dataset)
 
-            indexCurrentYear = findIndexYear(currentYear);
+            indexCurrentYear = findIndexYear(conf.currentYear);
             
+            //TODO Refacto
             //Store regions of the first year
             var metriclist = dataset[indexCurrentYear].regions;
             lookup = [];
@@ -46,6 +52,14 @@
                 lookup.push(o);
             })
             
+            var regionsPerYear = []
+            dataset.forEach(function(record, idx){
+                regionsPerYear.push(record.regions)
+            })
+
+            metricwidth = width / regionsPerYear.length;
+
+            
             // build the chart once the data are loaded
             buildRankChart();
             
@@ -54,10 +68,23 @@
             
             // add colors to lines compare to compared value
             colorizedLines()
+            
+            //Set Watchers
+            watchThings()
         });
         // ---------------------------------
         // ---------------------------------
-
+        
+        function watchThings(){
+            conf.watch('currentYear', function(property, oldval, val){
+                indexCurrentYear = findIndexYear(val);
+                
+                changeCurrentYear(indexCurrentYear);
+                
+                rectSlide(indexCurrentYear);
+            })
+        }
+        
         //Function to find index of a given year
         function findIndexYear(year){
             var ret;
@@ -238,16 +265,15 @@
             })
         }
         
+        function rectSlide(idx){
+            var rect = d3.select("rect");
+            rect.transition()
+            .attr("x", 10 + (metricwidth * idx));
+        }
+        
         //Main function to build Rank chart
         function buildRankChart(){
             
-            var regionsPerYear = []
-            dataset.forEach(function(record, idx){
-                regionsPerYear.push(record.regions)
-            })
-            
-            var metricwidth = width / regionsPerYear.length;
-
             // create the lines from the index values
             var pathfunction = function(obj){
                 var datavals = obj.data,
@@ -499,11 +525,6 @@
                 labels.classed('label-click', function(label, i){
                     return !d3.select(this).classed("label-click")
                 })
-            }
-            var rectSlide = function(idx){
-                var rect = d3.select("rect");
-                rect.transition()
-                .attr("x", 10 + (metricwidth * idx));
             }
        
             buildLineHeader()
