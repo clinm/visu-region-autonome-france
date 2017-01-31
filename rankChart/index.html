@@ -313,9 +313,9 @@
                             return '#' + String(rank)
                         }
                     })
-                    .on("mouseover", function(d){mouseOver(d.year)})
-                    .on("mouseout", function(d){mouseOut(d.year)})
-                    .on("click", function(d){click(d.year)})
+                    .on("mouseover", function(d){mouseOver(d.name.replace(/\s/g,''))})
+                    .on("mouseout", function(d){mouseOut(d.name.replace(/\s/g,''))})
+                    .on("click", function(d){click(d.name.replace(/\s/g,''))})
                     })
             }
 
@@ -456,18 +456,13 @@
                 .classed('label-accent', false)
             }
             var click = function(selectorclass){
-                d3.selectAll('.line-click')
-                .classed('line-click', false)
-                .classed('line-accent', false)
-                .classed('line-no-accent', true)
-                d3.selectAll('.label-click')
-                .classed('label-click', false)
-                .classed('label-accent', false)
-                .classed('label-no-accent', true)
-                d3.selectAll('.'+selectorclass+'_line')
-                .classed('line-click', true)
-                d3.selectAll('.'+selectorclass+'_text')
-                .classed('label-click', true)
+                var line = d3.selectAll('.'+selectorclass+'_line');
+                line.classed('line-click', !line.classed("line-click"))
+                
+                var labels = d3.selectAll('.'+selectorclass+'_text')
+                labels.classed('label-click', function(label, i){
+                    return !d3.select(this).classed("label-click")
+                })
             }
             var rectSlide = function(idx){
                 var rect = d3.select("rect");
