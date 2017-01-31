@@ -37,5 +37,32 @@
 
     </div>
     <script type="text/javascript" src="transport.js"></script>
+    <script>
+
+        //Load data and call bar chart function
+        d3.json("diff.json", function(error,data){
+            dataset = data;
+            if(error){
+                console.log(error);
+            }else{
+                var conf = $.extend({}, CHART.settings);
+                conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
+
+                c = CHART.chart(data, conf);
+                c.update(conf);
+                c.createSelect("#year");
+
+                var queries = {
+                    display_value: 'input[name="choice"]',
+                    sorted: '.checkbox',
+                    years: '#year'
+                };
+
+                CHART.bindToDom(queries, c);
+            }
+
+        });
+
+    </script>
 </body>
 </html>

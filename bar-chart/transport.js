@@ -195,38 +195,22 @@ CHART.chart = function(dataset, params) {
 
 };
 
-
-var c;
-
-//Load data and call bar chart function
-d3.json("diff.json", function(error,data){
-    dataset = data;
-    if(error){
-        console.log(error);
-    }else{
-        var conf = $.extend({}, CHART.settings);
-        conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
-
-        c = CHART.chart(data, conf);
-        c.update(conf);
-        c.createSelect("#year");
-    }
-
-    $('input[name="choice"]').on('change', function() {
-        var conf = c.getConf();
+CHART.bindToDom = function(queries, chart) {
+    $(queries.display_value).on('change', function() {
+        var conf = chart.getConf();
         conf.displayValue = $(this).attr('value');
-        c.update(conf);
+        chart.update(conf);
     });
 
-    $('.checkbox').on('change', function() {
-        var conf = c.getConf();
+    $(queries.sorted).on('change', function() {
+        var conf = chart.getConf();
         conf.sorted = $(this).is(':checked');
-        c.update(conf);
+        chart.update(conf);
     });
 
-    $('#year').on('change', function() {
-        var conf = c.getConf();
+    $(queries.years).on('change', function() {
+        var conf = chart.getConf();
         conf.selectedYear = $(this).val();
-        c.update(conf);
+        chart.update(conf);
     });
-});
+};
