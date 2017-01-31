@@ -1,0 +1,1646 @@
+[
+    {
+        "year": "1990",
+        "regions": [
+            {
+                "prod": 3008,
+                "cons": 4323,
+                "diff": -1315,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6617,
+                "cons": 6254,
+                "diff": 363,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 483,
+                "cons": 2742,
+                "diff": -2259,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4129,
+                "cons": 3261,
+                "diff": 868,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 29,
+                "cons": 3826,
+                "diff": -3797,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 218,
+                "cons": 5361,
+                "diff": -5143,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 19229,
+                "cons": 5539,
+                "diff": 13690,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 4107,
+                "cons": 3996,
+                "diff": 111,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 80,
+                "cons": 402,
+                "diff": -322,
+                "name": "CORSE"
+            },
+            {
+                "prod": 65,
+                "cons": 2511,
+                "diff": -2446,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 8881,
+                "cons": 5488,
+                "diff": 3393,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 0,
+                "cons": 21038,
+                "diff": -21038,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 166,
+                "cons": 4107,
+                "diff": -3941,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 138,
+                "cons": 1484,
+                "diff": -1346,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 4855,
+                "cons": 8507,
+                "diff": -3652,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 1168,
+                "cons": 5113,
+                "diff": -3945,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9688,
+                "cons": 12422,
+                "diff": -2734,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 1,
+                "cons": 5999,
+                "diff": -5998,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 4831,
+                "diff": -4830,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 9,
+                "cons": 4044,
+                "diff": -4035,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 721,
+                "cons": 10904,
+                "diff": -10183,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 24288,
+                "cons": 13496,
+                "diff": 10792,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "1992",
+        "regions": [
+            {
+                "prod": 2615,
+                "cons": 4639,
+                "diff": -2024,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6287,
+                "cons": 6704,
+                "diff": -417,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 175,
+                "cons": 2841,
+                "diff": -2666,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4506,
+                "cons": 3483,
+                "diff": 1023,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 9,
+                "cons": 4180,
+                "diff": -4171,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 53,
+                "cons": 6035,
+                "diff": -5982,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20691,
+                "cons": 6008,
+                "diff": 14683,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 4468,
+                "cons": 4267,
+                "diff": 201,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 34,
+                "cons": 439,
+                "diff": -405,
+                "name": "CORSE"
+            },
+            {
+                "prod": 77,
+                "cons": 2720,
+                "diff": -2643,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 11231,
+                "cons": 5923,
+                "diff": 5308,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 3,
+                "cons": 22332,
+                "diff": -22329,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 225,
+                "cons": 4354,
+                "diff": -4129,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 198,
+                "cons": 1603,
+                "diff": -1405,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 8931,
+                "cons": 8574,
+                "diff": 357,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 2877,
+                "cons": 5463,
+                "diff": -2586,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9460,
+                "cons": 13285,
+                "diff": -3825,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 2,
+                "cons": 6489,
+                "diff": -6487,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 5379,
+                "diff": -5378,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 11,
+                "cons": 4102,
+                "diff": -4091,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 1087,
+                "cons": 11478,
+                "diff": -10391,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 21545,
+                "cons": 14724,
+                "diff": 6821,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "1995",
+        "regions": [
+            {
+                "prod": 3758,
+                "cons": 4988,
+                "diff": -1230,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6972,
+                "cons": 6891,
+                "diff": 81,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 165,
+                "cons": 2865,
+                "diff": -2700,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4553,
+                "cons": 3136,
+                "diff": 1417,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 13,
+                "cons": 4078,
+                "diff": -4065,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 56,
+                "cons": 5724,
+                "diff": -5668,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 19960,
+                "cons": 5769,
+                "diff": 14191,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 4149,
+                "cons": 3970,
+                "diff": 179,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 25,
+                "cons": 434,
+                "diff": -409,
+                "name": "CORSE"
+            },
+            {
+                "prod": 88,
+                "cons": 2832,
+                "diff": -2744,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 13660,
+                "cons": 5840,
+                "diff": 7820,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 8,
+                "cons": 22495,
+                "diff": -22487,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 204,
+                "cons": 4126,
+                "diff": -3922,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 197,
+                "cons": 1539,
+                "diff": -1342,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 8937,
+                "cons": 8521,
+                "diff": 416,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 4985,
+                "cons": 5297,
+                "diff": -312,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 10192,
+                "cons": 13040,
+                "diff": -2848,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 2,
+                "cons": 6387,
+                "diff": -6385,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 4876,
+                "diff": -4875,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 12,
+                "cons": 4138,
+                "diff": -4126,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 1140,
+                "cons": 11750,
+                "diff": -10610,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 25830,
+                "cons": 14106,
+                "diff": 11724,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "1997",
+        "regions": [
+            {
+                "prod": 3824,
+                "cons": 5036,
+                "diff": -1212,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 7298,
+                "cons": 7012,
+                "diff": 286,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 115,
+                "cons": 2937,
+                "diff": -2822,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4215,
+                "cons": 3174,
+                "diff": 1041,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 9,
+                "cons": 4228,
+                "diff": -4219,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 52,
+                "cons": 6205,
+                "diff": -6153,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20846,
+                "cons": 6009,
+                "diff": 14837,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 7228,
+                "cons": 4005,
+                "diff": 3223,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 32,
+                "cons": 433,
+                "diff": -401,
+                "name": "CORSE"
+            },
+            {
+                "prod": 67,
+                "cons": 2886,
+                "diff": -2819,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 13683,
+                "cons": 5880,
+                "diff": 7803,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 7,
+                "cons": 23234,
+                "diff": -23227,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 200,
+                "cons": 4216,
+                "diff": -4016,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 143,
+                "cons": 1592,
+                "diff": -1449,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9711,
+                "cons": 8599,
+                "diff": 1112,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5713,
+                "cons": 5422,
+                "diff": 291,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9647,
+                "cons": 13634,
+                "diff": -3987,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 1,
+                "cons": 6723,
+                "diff": -6722,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 4987,
+                "diff": -4986,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 11,
+                "cons": 4144,
+                "diff": -4133,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 1096,
+                "cons": 11821,
+                "diff": -10725,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 25032,
+                "cons": 14660,
+                "diff": 10372,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "1999",
+        "regions": [
+            {
+                "prod": 3971,
+                "cons": 5333,
+                "diff": -1362,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6507,
+                "cons": 7737,
+                "diff": -1230,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 162,
+                "cons": 3217,
+                "diff": -3055,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4681,
+                "cons": 3374,
+                "diff": 1307,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 12,
+                "cons": 4542,
+                "diff": -4530,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 65,
+                "cons": 6613,
+                "diff": -6548,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 19150,
+                "cons": 6295,
+                "diff": 12855,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 8213,
+                "cons": 4165,
+                "diff": 4048,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 39,
+                "cons": 500,
+                "diff": -461,
+                "name": "CORSE"
+            },
+            {
+                "prod": 91,
+                "cons": 3139,
+                "diff": -3048,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 14320,
+                "cons": 5950,
+                "diff": 8370,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 5,
+                "cons": 24802,
+                "diff": -24797,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 232,
+                "cons": 4583,
+                "diff": -4351,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 220,
+                "cons": 1649,
+                "diff": -1429,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9344,
+                "cons": 8018,
+                "diff": 1326,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5709,
+                "cons": 5936,
+                "diff": -227,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9440,
+                "cons": 13599,
+                "diff": -4159,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 2,
+                "cons": 7337,
+                "diff": -7335,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 5359,
+                "diff": -5358,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 3649,
+                "cons": 4480,
+                "diff": -831,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 998,
+                "cons": 12681,
+                "diff": -11683,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 25407,
+                "cons": 15717,
+                "diff": 9690,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2002",
+        "regions": [
+            {
+                "prod": 3243,
+                "cons": 5271,
+                "diff": -2028,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6975,
+                "cons": 7891,
+                "diff": -916,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 116,
+                "cons": 3206,
+                "diff": -3090,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4339,
+                "cons": 3283,
+                "diff": 1056,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 10,
+                "cons": 4482,
+                "diff": -4472,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 52,
+                "cons": 6990,
+                "diff": -6938,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20808,
+                "cons": 6492,
+                "diff": 14316,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 9609,
+                "cons": 4138,
+                "diff": 5471,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 24,
+                "cons": 556,
+                "diff": -532,
+                "name": "CORSE"
+            },
+            {
+                "prod": 74,
+                "cons": 3013,
+                "diff": -2939,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 12747,
+                "cons": 5682,
+                "diff": 7065,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 187,
+                "cons": 24304,
+                "diff": -24117,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 187,
+                "cons": 4510,
+                "diff": -4323,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 148,
+                "cons": 1678,
+                "diff": -1530,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9544,
+                "cons": 8931,
+                "diff": 613,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5773,
+                "cons": 5744,
+                "diff": 29,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9233,
+                "cons": 13746,
+                "diff": -4513,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 2,
+                "cons": 7733,
+                "diff": -7731,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 5336,
+                "diff": -5335,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 4961,
+                "cons": 4293,
+                "diff": 668,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 801,
+                "cons": 12469,
+                "diff": -11668,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 25529,
+                "cons": 15324,
+                "diff": 10205,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2004",
+        "regions": [
+            {
+                "prod": 3405,
+                "cons": 5141,
+                "diff": -1736,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6731,
+                "cons": 8458,
+                "diff": -1727,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 150,
+                "cons": 3321,
+                "diff": -3171,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4722,
+                "cons": 3493,
+                "diff": 1229,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 9,
+                "cons": 4425,
+                "diff": -4416,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 49,
+                "cons": 7165,
+                "diff": -7116,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20712,
+                "cons": 6075,
+                "diff": 14637,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 9857,
+                "cons": 4131,
+                "diff": 5726,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 36,
+                "cons": 624,
+                "diff": -588,
+                "name": "CORSE"
+            },
+            {
+                "prod": 66,
+                "cons": 3116,
+                "diff": -3050,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 12862,
+                "cons": 5151,
+                "diff": 7711,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 366,
+                "cons": 25819,
+                "diff": -25453,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 366,
+                "cons": 4840,
+                "diff": -4474,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 175,
+                "cons": 1640,
+                "diff": -1465,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9299,
+                "cons": 8912,
+                "diff": 387,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5135,
+                "cons": 5673,
+                "diff": -538,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 10086,
+                "cons": 14312,
+                "diff": -4226,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 1,
+                "cons": 8210,
+                "diff": -8209,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 5172,
+                "diff": -5171,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 5997,
+                "cons": 4015,
+                "diff": 1982,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 829,
+                "cons": 13117,
+                "diff": -12288,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 26535,
+                "cons": 16108,
+                "diff": 10427,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2005",
+        "regions": [
+            {
+                "prod": 3679,
+                "cons": 5743,
+                "diff": -2064,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 6669,
+                "cons": 8703,
+                "diff": -2034,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 115,
+                "cons": 3364,
+                "diff": -3249,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4900,
+                "cons": 3514,
+                "diff": 1386,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 9,
+                "cons": 4462,
+                "diff": -4453,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 49,
+                "cons": 7185,
+                "diff": -7136,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20345,
+                "cons": 6266,
+                "diff": 14079,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 9517,
+                "cons": 4344,
+                "diff": 5173,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 27,
+                "cons": 677,
+                "diff": -650,
+                "name": "CORSE"
+            },
+            {
+                "prod": 61,
+                "cons": 3276,
+                "diff": -3215,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 13903,
+                "cons": 5989,
+                "diff": 7914,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 383,
+                "cons": 26032,
+                "diff": -25649,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 383,
+                "cons": 5008,
+                "diff": -4625,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 132,
+                "cons": 1935,
+                "diff": -1803,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9932,
+                "cons": 8806,
+                "diff": 1126,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5631,
+                "cons": 6220,
+                "diff": -589,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9947,
+                "cons": 13958,
+                "diff": -4011,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 1,
+                "cons": 8272,
+                "diff": -8271,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 1,
+                "cons": 5108,
+                "diff": -5107,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 5025,
+                "cons": 4574,
+                "diff": 451,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 634,
+                "cons": 13556,
+                "diff": -12922,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 25931,
+                "cons": 17348,
+                "diff": 8583,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2006",
+        "regions": [
+            {
+                "prod": 3693,
+                "cons": 5402,
+                "diff": -1709,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 7037,
+                "cons": 8566,
+                "diff": -1529,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 133,
+                "cons": 3318,
+                "diff": -3185,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4670,
+                "cons": 3610,
+                "diff": 1060,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 10,
+                "cons": 4420,
+                "diff": -4410,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 72,
+                "cons": 7178,
+                "diff": -7106,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20231,
+                "cons": 6345,
+                "diff": 13886,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 10178,
+                "cons": 4272,
+                "diff": 5906,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 33,
+                "cons": 647,
+                "diff": -614,
+                "name": "CORSE"
+            },
+            {
+                "prod": 70,
+                "cons": 3328,
+                "diff": -3258,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 14046,
+                "cons": 6079,
+                "diff": 7967,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 372,
+                "cons": 26164,
+                "diff": -25792,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 372,
+                "cons": 4961,
+                "diff": -4589,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 169,
+                "cons": 2021,
+                "diff": -1852,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 8871,
+                "cons": 8731,
+                "diff": 140,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5411,
+                "cons": 6188,
+                "diff": -777,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 10004,
+                "cons": 13559,
+                "diff": -3555,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 6,
+                "cons": 8168,
+                "diff": -8162,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 14,
+                "cons": 5296,
+                "diff": -5282,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 5602,
+                "cons": 4391,
+                "diff": 1211,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 740,
+                "cons": 12973,
+                "diff": -12233,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 25790,
+                "cons": 17021,
+                "diff": 8769,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2007",
+        "regions": [
+            {
+                "prod": 3137,
+                "cons": 5044,
+                "diff": -1907,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 7148,
+                "cons": 8304,
+                "diff": -1156,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 154,
+                "cons": 3210,
+                "diff": -3056,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4609,
+                "cons": 3638,
+                "diff": 971,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 10,
+                "cons": 4324,
+                "diff": -4314,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 90,
+                "cons": 6955,
+                "diff": -6865,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20070,
+                "cons": 6146,
+                "diff": 13924,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 11117,
+                "cons": 4246,
+                "diff": 6871,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 25,
+                "cons": 634,
+                "diff": -609,
+                "name": "CORSE"
+            },
+            {
+                "prod": 78,
+                "cons": 3156,
+                "diff": -3078,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 11968,
+                "cons": 6362,
+                "diff": 5606,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 379,
+                "cons": 24997,
+                "diff": -24618,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 379,
+                "cons": 4845,
+                "diff": -4466,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 191,
+                "cons": 2041,
+                "diff": -1850,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9705,
+                "cons": 8162,
+                "diff": 1543,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5799,
+                "cons": 6094,
+                "diff": -295,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9700,
+                "cons": 12694,
+                "diff": -2994,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 17,
+                "cons": 7851,
+                "diff": -7834,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 30,
+                "cons": 5149,
+                "diff": -5119,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 4960,
+                "cons": 4308,
+                "diff": 652,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 725,
+                "cons": 12759,
+                "diff": -12034,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 24965,
+                "cons": 16942,
+                "diff": 8023,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2008",
+        "regions": [
+            {
+                "prod": 3349,
+                "cons": 5344,
+                "diff": -1995,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 7379,
+                "cons": 8580,
+                "diff": -1201,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 176,
+                "cons": 3276,
+                "diff": -3100,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 2887,
+                "cons": 3545,
+                "diff": -658,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 13,
+                "cons": 4290,
+                "diff": -4277,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 97,
+                "cons": 7177,
+                "diff": -7080,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 20334,
+                "cons": 6414,
+                "diff": 13920,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 10407,
+                "cons": 4215,
+                "diff": 6192,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 46,
+                "cons": 663,
+                "diff": -617,
+                "name": "CORSE"
+            },
+            {
+                "prod": 78,
+                "cons": 3250,
+                "diff": -3172,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 15002,
+                "cons": 6532,
+                "diff": 8470,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 439,
+                "cons": 25401,
+                "diff": -24962,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 439,
+                "cons": 5037,
+                "diff": -4598,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 209,
+                "cons": 1930,
+                "diff": -1721,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 9138,
+                "cons": 8495,
+                "diff": 643,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5300,
+                "cons": 5953,
+                "diff": -653,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9827,
+                "cons": 12795,
+                "diff": -2968,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 24,
+                "cons": 8444,
+                "diff": -8420,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 47,
+                "cons": 5067,
+                "diff": -5020,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 5542,
+                "cons": 4505,
+                "diff": 1037,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 799,
+                "cons": 13082,
+                "diff": -12283,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 24243,
+                "cons": 16342,
+                "diff": 7901,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    },
+    {
+        "year": "2009",
+        "regions": [
+            {
+                "prod": 2902,
+                "cons": 5423,
+                "diff": -2521,
+                "name": "ALSACE"
+            },
+            {
+                "prod": 5695,
+                "cons": 8385,
+                "diff": -2690,
+                "name": "AQUITAINE"
+            },
+            {
+                "prod": 135,
+                "cons": 3181,
+                "diff": -3046,
+                "name": "AUVERGNE"
+            },
+            {
+                "prod": 4313,
+                "cons": 3492,
+                "diff": 821,
+                "name": "BASSE NORMANDIE"
+            },
+            {
+                "prod": 8,
+                "cons": 4205,
+                "diff": -4197,
+                "name": "BOURGOGNE"
+            },
+            {
+                "prod": 112,
+                "cons": 7105,
+                "diff": -6993,
+                "name": "BRETAGNE"
+            },
+            {
+                "prod": 18506,
+                "cons": 6367,
+                "diff": 12139,
+                "name": "CENTRE-VAL DE LOIRE"
+            },
+            {
+                "prod": 8122,
+                "cons": 4195,
+                "diff": 3927,
+                "name": "CHAMPAGNE-ARDENNE"
+            },
+            {
+                "prod": 44,
+                "cons": 701,
+                "diff": -657,
+                "name": "CORSE"
+            },
+            {
+                "prod": 53,
+                "cons": 3051,
+                "diff": -2998,
+                "name": "FRANCHE COMTE"
+            },
+            {
+                "prod": 12334,
+                "cons": 5968,
+                "diff": 6366,
+                "name": "HAUTE NORMANDIE"
+            },
+            {
+                "prod": 327,
+                "cons": 24304,
+                "diff": -23977,
+                "name": "ILE DE FRANCE"
+            },
+            {
+                "prod": 327,
+                "cons": 4989,
+                "diff": -4662,
+                "name": "LANGUEDOC-ROUSSILLON"
+            },
+            {
+                "prod": 137,
+                "cons": 1823,
+                "diff": -1686,
+                "name": "LIMOUSIN"
+            },
+            {
+                "prod": 8817,
+                "cons": 7849,
+                "diff": 968,
+                "name": "LORRAINE"
+            },
+            {
+                "prod": 5949,
+                "cons": 5724,
+                "diff": 225,
+                "name": "MIDI-PYRENEES"
+            },
+            {
+                "prod": 9715,
+                "cons": 11839,
+                "diff": -2124,
+                "name": "NORD-PAS-DE-CALAIS"
+            },
+            {
+                "prod": 38,
+                "cons": 8269,
+                "diff": -8231,
+                "name": "PAYS DE LA LOIRE"
+            },
+            {
+                "prod": 90,
+                "cons": 5363,
+                "diff": -5273,
+                "name": "PICARDIE"
+            },
+            {
+                "prod": 5184,
+                "cons": 4458,
+                "diff": 726,
+                "name": "POITOU-CHARENTES"
+            },
+            {
+                "prod": 905,
+                "cons": 11544,
+                "diff": -10639,
+                "name": "PROVENCE-ALPES-COTE D AZUR"
+            },
+            {
+                "prod": 24241,
+                "cons": 15612,
+                "diff": 8629,
+                "name": "RHONE-ALPES"
+            }
+        ]
+    }
+]

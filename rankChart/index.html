@@ -16,7 +16,7 @@
             dataset;
 
         // pull in the data
-        var datasource = d3.json("../datasource/prod_totale_petrole.csv",function(error,data){
+        var datasource = d3.json("data.json",function(error,data){
             if (error) return console.warn(error);
             dataset = data;
             
@@ -41,7 +41,7 @@
         //Function to order years by descending order
         function orderByDescendingYear(data){
             data.sort(function(a,b){
-                return b.year-a.year
+                return parseInt(b.year)-parseInt(a.year)
             })
             return data
         }
@@ -85,7 +85,21 @@
                 .defined(function(d) { return d.y != null; }) // no if null
                 .x(function(d) { return d.x; })
                 .y(function(d) { return d.y; })
-                return lineFunction(newArray); // send back the line
+                
+                // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+                //CAUTION HACK -- When straight line doesn't want to be colorized
+                //Change a little bit the line to never have straight line
+                var retour = lineFunction(newArray)
+                    
+                for (var i=retour.length-1; i>=0;i--){
+                    if (retour[i]==',' || retour[i]==' '){
+                        retour = retour.substring(0,i+1) + (parseInt(retour.substring(i+1,retour.length)) -0.0001)
+                        break;
+                    }
+                }
+                // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+                
+                return retour // send back the line
             }
 
             var mouseOver = function(selectorclass){
@@ -167,6 +181,7 @@
                 var o = {};
                 o.metric = rec.name;
                 o.data = [];
+                o.diff = rec.diff
                 lookup.push(o);
             })
 
@@ -207,10 +222,127 @@
             .classed("line-no-accent", true)
             // call path function on data, passing in array length for y measure
             .attr("d",function(d,i){return pathfunction({len:lookup.length,data:d.data})})
+            .attr("stroke", function(d,i){
+                return "url(#line"+i+")"
+            })
             .on("mouseover", function(d){mouseOver(d.metric.replace(/\s/g,''))})
             .on("mouseout", function(d){mouseOut(d.metric.replace(/\s/g,''))})
             .on("click", function(d){click(d.metric.replace(/\s/g,''))})
 
+            /* ---------- */
+            /* Path COLOR */
+            /* ---------- */
+            var colorDefs = svg.append("defs")
+            .selectAll("linearGradient")
+            .data(lookup)
+            .enter()
+            .append("linearGradient")
+            .attr("id", function(region, index){
+                return "line" + index;
+            })
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%")
+            
+            var regionsWithCurrentDiff = [];
+            dataset[0].regions.forEach(function(d,i){
+                var obj = {}
+                obj.name = d.name
+                obj.diff = d.diff
+                regionsWithCurrentDiff.push(obj)
+            })
+            
+            
+            regionsWithCurrentDiff.forEach(function(r, i){
+                
+                if (r.diff<0)
+                    colorDefs.filter(function(line, l){
+                        if (line.metric==r.name)
+                            return true
+                        else 
+                            return false
+                    })
+                    .append("stop")
+                    .attr("offset", "0%")
+                    .attr("style", "stop-color:rgb(255,0,0);stop-opacity:1")
+                else
+                    colorDefs.filter(function(line, l){
+                        if (line.metric==r.name)
+                            return true
+                        else 
+                            return false
+                    })
+                    .append("stop")
+                    .attr("offset", "0%")
+                    .attr("style", "stop-color:rgb(0,255,0);stop-opacity:1")
+            })
+            
+            dataset.forEach(function(record, i){
+                
+                var year = record.year;
+                var regions = record.regions;
+                
+                regions.forEach(function(region, j){
+
+                    lookup.forEach(function(r, k){
+
+                        // if we have a match...
+                        if ( r.metric == region.name ){
+                            
+                            if (region.diff < 0 && regionsWithCurrentDiff[k].diff >=0){
+                                
+                                colorDefs.filter(function(line, l){
+                                    if (r.metric==line.metric)
+                                        return true
+                                        else return false
+                                            })
+                                .append("stop")
+                                .attr("offset", ((100/(dataset.length-1))*i)-5+"%")
+                                .attr("style", "stop-color:rgb(0,255,0);stop-opacity:1")
+                                
+                                colorDefs.filter(function(line, l){
+                                    if (r.metric==line.metric)
+                                        return true
+                                    else return false
+                                })
+                                .append("stop")
+                                .attr("offset", ((100/(dataset.length-1))*i)+"%")
+                                .attr("style", "stop-color:rgb(255,0,0);stop-opacity:1")
+                                
+                                regionsWithCurrentDiff[k].diff = region.diff
+                            }
+                            else{
+                                if (region.diff >= 0 && regionsWithCurrentDiff[k].diff < 0){
+                                    
+                                    colorDefs.filter(function(line, l){
+                                        if (r.metric==line.metric)
+                                            return true
+                                            else return false
+                                                })
+                                    .append("stop")
+                                    .attr("offset", ((100/(dataset.length-1))*i)-5+"%")
+                                    .attr("style", "stop-color:rgb(255,0,0);stop-opacity:1")
+                                    
+                                    colorDefs.filter(function(line, l){
+                                        if (r.metric==line.metric)
+                                            return true
+                                        else return false
+                                    })
+                                    .append("stop")
+                                    .attr("offset", ((100/(dataset.length-1))*i)+"%")
+                                    .attr("style", "stop-color:rgb(0,255,0);stop-opacity:1")
+
+                                    regionsWithCurrentDiff[k].diff = region.diff
+                                }
+                            }
+                            
+                            
+                        }
+                    })
+                })
+            })
+            
             // pull put keys only for headers
             var keys = [];
             dataset.forEach(function(record, idx){

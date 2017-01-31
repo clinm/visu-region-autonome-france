@@ -6,7 +6,8 @@ body {
     flex-direction: row;
 }
 
-.viz {
+.viz{
+    
 }
 
 .titleHeader{
@@ -21,14 +22,12 @@ body {
 }
 
 .line {
-    stroke: #666;
     stroke-width: 2;
     fill: none;
 }
 
 .line-accent {
-    stroke: cornflowerblue;
-    stroke-width: 4;
+    stroke-width: 5;
     fill: none;
 }
 
