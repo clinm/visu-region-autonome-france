@@ -48,12 +48,12 @@ a:focus {
   z-index: 99999;
 }
 #main-slider {
-  background-image: url(../images/energie.png);
-  background-attachment: fixed ;
-  background-position: center;
+  background-image: url(../images/energie.jpeg);
+  
   background-size: cover;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
-  padding: 110px 0;
+  padding: 200px 0;
   color: #fff;
 }
 #main-slider .item {
@@ -476,7 +476,7 @@ a:focus {
   margin-left: 20px;
   width: 200px;
   height: 78px;
-  background: url(../images/logo.jpg) no-repeat 0 ;
+  background: url(../images/logo.jpg) no-repeat 0 50%;
 }
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
