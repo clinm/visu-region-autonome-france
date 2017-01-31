@@ -52,7 +52,6 @@ a:focus {
   background-attachment: fixed ;
   background-position: center;
   background-size: cover;
-  margin-bottom: 40px;
   background-repeat: no-repeat;
   padding: 110px 0;
   color: #fff;
@@ -357,7 +356,7 @@ a:focus {
   padding-bottom: 0;
 }
 #services .row > div {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .center {
   text-align: center;
