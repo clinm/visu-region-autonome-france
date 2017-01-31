@@ -19,11 +19,11 @@
             lookup,
             metricwidth,
             indexCurrentYear,
-            value = "diff",
             negativeColor = "rgb(255,0,0)",
             positiveColor = "rgb(0,255,0)",
             conf = {
-                currentYear: "2008"
+                currentYear: "2008",
+                comparedValue: "diff"
             };
         
         // ---------------------------------
@@ -35,9 +35,8 @@
             dataset = data;
             
             //Adapt data to visualisation
-            dataset = orderByRank(dataset)
-            //dataset = orderByDescendingYear(dataset)
-
+            dataset = orderByRank(dataset, conf.comparedValue)
+            
             indexCurrentYear = findIndexYear(conf.currentYear);
             
             //TODO Refacto
@@ -48,7 +47,7 @@
                 var o = {};
                 o.metric = rec.name;
                 o.data = [];
-                o[value] = rec[value]
+                o[conf.comparedValue] = rec[conf.comparedValue]
                 lookup.push(o);
             })
             
@@ -61,13 +60,13 @@
 
             
             // build the chart once the data are loaded
-            buildRankChart();
+            buildRankChart(conf.comparedValue);
             
             // build TOP
             makeTOP();
             
             // add colors to lines compare to compared value
-            colorizedLines()
+            colorizedLines(conf.comparedValue)
             
             //Set Watchers
             watchThings()
@@ -83,6 +82,27 @@
                 
                 rectSlide(indexCurrentYear);
             })
+            
+            conf.watch('comparedValue', function(property, oldval, val){
+                
+                dataset = orderByRank(dataset, val)
+                
+                updateRankChart(val)
+                
+                makeTOP();
+                
+                colorizedLines(val);
+                
+                changeCurrentYear(indexCurrentYear);
+            })
+            
+//            conf.watch('negativeColor', function(property, oldval, val){
+//
+//            })
+//            
+//            conf.watch('positiveColor', function(property, oldval, val){
+//
+//            })
         }
         
         //Function to find index of a given year
@@ -97,10 +117,10 @@
         }
         
         //Function to order regions by ascending rank into each year
-        function orderByRank(data){
+        function orderByRank(data, comparedValue){
             data.forEach(function(oneYear, index){
                 oneYear.regions.sort(function(a, b){
-                    return b[value]-a[value]
+                    return b[comparedValue]-a[comparedValue]
                 })
             })
             return data;
@@ -158,7 +178,7 @@
         }
 
         // Add color to lines (use Linear gradient)
-        function colorizedLines(){
+        function colorizedLines(comparedValue){
             
             function linearGradient(selector, percentage, color){
                 return selector.append("stop")
@@ -186,14 +206,14 @@
             dataset[0].regions.forEach(function(d,i){
                 var obj = {}
                 obj.name = d.name
-                obj[value] = d[value]
+                obj[comparedValue] = d[comparedValue]
                 regionsWithCurrentDiff.push(obj)
             })
 
             //Create first color of each line
             regionsWithCurrentDiff.forEach(function(r, i){
 
-                if (r[value]<0)
+                if (r[comparedValue]<0)
                     colorDefs.filter(function(line, l){
                         if (line.metric==r.name)
                             return true
@@ -225,7 +245,7 @@
                         // if we have a match...
                         if ( r.metric == region.name ){
 
-                            if (region[value] < 0 && regionsWithCurrentDiff[k][value] >=0){
+                            if (region[comparedValue] < 0 && regionsWithCurrentDiff[k][comparedValue] >=0){
 
                                 var def = colorDefs.filter(function(line, l){
                                     if (r.metric==line.metric)
@@ -238,10 +258,10 @@
 
                                 def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", negativeColor)
 
-                                regionsWithCurrentDiff[k][value] = region[value]
+                                regionsWithCurrentDiff[k][comparedValue] = region[comparedValue]
                             }
                             else{
-                                if (region[value] >= 0 && regionsWithCurrentDiff[k][value] < 0){
+                                if (region[comparedValue] >= 0 && regionsWithCurrentDiff[k][comparedValue] < 0){
 
                                     var def = colorDefs.filter(function(line, l){
                                         if (r.metric==line.metric)
@@ -254,7 +274,7 @@
                                     
                                     def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", positiveColor)
 
-                                    regionsWithCurrentDiff[k][value] = region[value]
+                                    regionsWithCurrentDiff[k][comparedValue] = region[comparedValue]
                                 }
                             }
 
@@ -271,96 +291,191 @@
             .attr("x", 10 + (metricwidth * idx));
         }
         
-        //Main function to build Rank chart
-        function buildRankChart(){
-            
-            // create the lines from the index values
-            var pathfunction = function(obj){
-                var datavals = obj.data,
-                    dataLen = datavals.length,
-                    // new array to store the x/y pairs to build the 'plateaus'
-                    newArray = [];
-                datavals.forEach(function(d,i){
-                    var x1,y1,x2,y2;
-                    // if the value isn't null
-                    if ( d !== null) {
-                        x1 = metricwidth * i + linePadding; 
-                        y1 = header + (innerheight / obj.len) * (d + 1);
-                        x2 = metricwidth * i + metricwidth - linePadding;
-                        y2 = header + (innerheight / obj.len) * (d + 1);
-                        newArray.push({x:x1,y:y1});
-                        newArray.push({x:x2,y:y2});
-                    } else {
-                        // blank space in line if null value...
-                        x1 = y1 = x2 = y2 = null;
-                        newArray.push({x:x1,y:y1});
-                        newArray.push({x:x2,y:y2});
-                    }
+        var mouseOver = function(selectorclass){
+            d3.selectAll('.'+selectorclass+'_line:not(.line-click)')
+            .classed('line-no-accent', false)
+            .classed('line-accent', true)
+            d3.selectAll('.'+selectorclass+'_text:not(.label-click)')
+            .classed('label-no-accent', false)
+            .classed('label-accent', true)
+        }
+        var mouseOut = function(selectorclass){
+            d3.selectAll('.'+selectorclass+'_line:not(.line-click)')
+            .classed('line-accent', false)
+            .classed('line-no-accent', true)
+            d3.selectAll('.'+selectorclass+'_text:not(.label-click)')
+            .classed('label-no-accent', true)
+            .classed('label-accent', false)
+        }
+        var click = function(selectorclass){
+            var line = d3.selectAll('.'+selectorclass+'_line');
+            line.classed('line-click', !line.classed("line-click"))
 
-                });
-
-                var lineFunction = d3.line()
-                .defined(function(d) { return d.y != null; }) // no if null
-                .x(function(d) { return d.x; })
-                .y(function(d) { return d.y; })
-                
-                // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-                //CAUTION HACK -- When straight line doesn't want to be colorized
-                //Change a little bit the line to never have straight line
-                var retour = lineFunction(newArray)
-                    
-                for (var i=retour.length-1; i>=0;i--){
-                    if (retour[i]==',' || retour[i]==' '){
-                        retour = retour.substring(0,i+1) + (parseInt(retour.substring(i+1,retour.length)) -0.0001)
-                        break;
-                    }
+            var labels = d3.selectAll('.'+selectorclass+'_text')
+            labels.classed('label-click', function(label, i){
+                return !d3.select(this).classed("label-click")
+            })
+        }
+        
+        // create the lines from the index values
+        var pathfunction = function(obj){
+            var datavals = obj.data,
+                dataLen = datavals.length,
+                // new array to store the x/y pairs to build the 'plateaus'
+                newArray = [];
+            datavals.forEach(function(d,i){
+                var x1,y1,x2,y2;
+                // if the value isn't null
+                if ( d !== null) {
+                    x1 = metricwidth * i + linePadding; 
+                    y1 = header + (innerheight / obj.len) * (d + 1);
+                    x2 = metricwidth * i + metricwidth - linePadding;
+                    y2 = header + (innerheight / obj.len) * (d + 1);
+                    newArray.push({x:x1,y:y1});
+                    newArray.push({x:x2,y:y2});
+                } else {
+                    // blank space in line if null value...
+                    x1 = y1 = x2 = y2 = null;
+                    newArray.push({x:x1,y:y1});
+                    newArray.push({x:x2,y:y2});
                 }
-                // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
-                
-                return retour // send back the line
+
+            });
+
+            var lineFunction = d3.line()
+            .defined(function(d) { return d.y != null; }) // no if null
+            .x(function(d) { return d.x; })
+            .y(function(d) { return d.y; })
+
+            // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+            //CAUTION HACK -- When straight line doesn't want to be colorized
+            //Change a little bit the line to never have straight line
+            var retour = lineFunction(newArray)
+
+            for (var i=retour.length-1; i>=0;i--){
+                if (retour[i]==',' || retour[i]==' '){
+                    retour = retour.substring(0,i+1) + (parseInt(retour.substring(i+1,retour.length)) -0.0001)
+                    break;
+                }
             }
-            
-            function buildLineText(){
-                var textGroup = svg
-                .selectAll("textgroup")
-                .data(dataset)
+            // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\
+
+            return retour // send back the line
+        }
+        
+        function buildLineText(comparedValue){
+            var textGroup = d3.select("body svg.viz")
+            .selectAll("textgroup")
+            .data(dataset)
+            .enter()
+            .append("g");
+
+            textGroup
+            .each(function(record,i){
+
+                var metric = d3.select(this)
+                .selectAll("text")
+                .data(record.regions)
                 .enter()
-                .append("g");
-
-                textGroup
-                .each(function(record,i){
-
-                    var metric = d3.select(this)
-                    .selectAll("text")
-                    .data(record.regions)
-                    .enter()
-                    .append("text")
-                    .attr('class',function(d, idx){
-                        return d.name.replace(/\s/g,'') + '_text';})
-                    .classed('label', true)
-                    .classed("label-no-accent", true)
-                    .attr("x", function(d, idx){
-                        if ( d ) {
-                            return metricwidth * i + linePadding;
-                        }
-                    })
-                    .attr("y", function(d, idx){
-                        if ( d ) {
-                            return header + (innerheight / record.regions.length) * (idx + 1) - 5;
-                        }
-                    })
-                    .text(function(d, idx){
-                        var rank = idx + 1;
-                        if (d[value] != null) {
-                            return '#' + String(rank)
-                        }
-                    })
-                    .on("mouseover", function(d){mouseOver(d.name.replace(/\s/g,''))})
-                    .on("mouseout", function(d){mouseOut(d.name.replace(/\s/g,''))})
-                    .on("click", function(d){click(d.name.replace(/\s/g,''))})
+                .append("text")
+                .attr('class',function(d, idx){
+                    return d.name.replace(/\s/g,'') + '_text';})
+                .classed('label', true)
+                .classed("label-no-accent", true)
+                .attr("x", function(d, idx){
+                    if ( d ) {
+                        return metricwidth * i + linePadding;
+                    }
                 })
+                .attr("y", function(d, idx){
+                    if ( d ) {
+                        return header + (innerheight / record.regions.length) * (idx + 1) - 5;
+                    }
+                })
+                .text(function(d, idx){
+                    var rank = idx + 1;
+                    if (d[comparedValue] != null) {
+                        return '#' + String(rank)
+                    }
+                })
+                .on("mouseover", function(d){mouseOver(d.name.replace(/\s/g,''))})
+                .on("mouseout", function(d){mouseOut(d.name.replace(/\s/g,''))})
+                .on("click", function(d){click(d.name.replace(/\s/g,''))})
+                })
+        }
+        
+        function buildLines(){
+            // build the lines
+            var paths = d3.select("body svg.viz")
+            .selectAll("paths")
+            // bind lookup to lines
+            .data(lookup)
+            .enter()
+            .append("path")
+            .attr("class",function(d){ return d.metric.replace(/\s/g,'')+'_line'}) // use class attr to add login to class assignment
+            .classed("line", true) // add additional classes with classed
+            .classed("line-no-accent", true)
+            // call path function on data, passing in array length for y measure
+            .attr("d",function(d,i){return pathfunction({len:lookup.length,data:d.data})})
+            .attr("stroke", function(d,i){
+                return "url(#line"+i+")"
+            })
+            .on("mouseover", function(d){mouseOver(d.metric.replace(/\s/g,''))})
+            .on("mouseout", function(d){mouseOut(d.metric.replace(/\s/g,''))})
+            .on("click", function(d){click(d.metric.replace(/\s/g,''))})
             }
 
+
+        function assignRankToRegion(comparedValue){
+            //Assign to each region his rank for each year 
+            dataset.forEach(function(record,index){
+
+                var metric = record.year;
+                var vals = record.regions;
+
+                vals.forEach(function(rec,idx){
+
+                    lookup.forEach(function(r,i){
+
+                        // if we have a match...
+                        if ( r.metric == rec.name ){
+
+                            if (rec[comparedValue] != null) {
+                                lookup[i].data[index] = idx;
+
+                            } else {
+                                lookup[i].data[index] = null;
+                            }
+
+                        }
+                    })
+                })
+            })
+        }
+
+        function buildEndLineHeader(){
+            var lineHeader = d3.select("body")
+            .append("svg")
+            .classed("titleHeader", true)
+            .selectAll('.lineHeader')
+            .data(dataset[dataset.length-1].regions)
+            .enter()
+            .append("text")
+            .classed("lineHeader", true)
+            .attr("x", function(d, idx){
+                return 0;
+            })
+            .attr("y", function(d, idx){
+                return header + (innerheight / dataset[0].regions.length) * (idx + 1);
+            })
+            .text(function(d,i){
+                return d.name
+            })    
+        }
+        
+        //Main function to build Rank chart
+        function buildRankChart(comparedValue){
+            
             function buildYearText(){
                 
                 // pull put keys only for headers
@@ -390,55 +505,6 @@
                 })    
             }
             
-            function buildLines(){
-                // build the lines
-                var paths = svg
-                .selectAll("paths")
-                // bind lookup to lines
-                .data(lookup)
-                .enter()
-                .append("path")
-                .attr("class",function(d){ return d.metric.replace(/\s/g,'')+'_line'}) // use class attr to add login to class assignment
-                .classed("line", true) // add additional classes with classed
-                .classed("line-no-accent", true)
-                // call path function on data, passing in array length for y measure
-                .attr("d",function(d,i){return pathfunction({len:lookup.length,data:d.data})})
-                .attr("stroke", function(d,i){
-                    return "url(#line"+i+")"
-                })
-                .on("mouseover", function(d){mouseOver(d.metric.replace(/\s/g,''))})
-                .on("mouseout", function(d){mouseOut(d.metric.replace(/\s/g,''))})
-                .on("click", function(d){click(d.metric.replace(/\s/g,''))})
-            }
-            
-
-            function assignRankToRegion(){
-                //Assign to each region his rank for each year 
-                dataset.forEach(function(record,index){
-
-                    var metric = record.year;
-                    var vals = record.regions;
-
-                    vals.forEach(function(rec,idx){
-
-                        lookup.forEach(function(r,i){
-
-                            // if we have a match...
-                            if ( r.metric == rec.name ){
-
-                                if (rec[value] != null) {
-                                    lookup[i].data[index] = idx;
-
-                                } else {
-                                    lookup[i].data[index] = null;
-                                }
-
-                            }
-                        })
-                    })
-                })
-            }
-            
             function drawCurrentYearRectangle(){
                 //Draw the Rectangle
                 var rectangle = svg.append("rect")
@@ -451,26 +517,6 @@
                 .attr("stroke", "lightgrey")
                 .attr("stroke-width",2)
                 .attr("fill","white")
-            }
-            
-            function buildEndLineHeader(){
-                var lineHeader = d3.select("body")
-                .append("svg")
-                .classed("titleHeader", true)
-                .selectAll('.lineHeader')
-                .data(dataset[dataset.length-1].regions)
-                .enter()
-                .append("text")
-                .classed("lineHeader", true)
-                .attr("x", function(d, idx){
-                    return 0;
-                })
-                .attr("y", function(d, idx){
-                    return header + (innerheight / dataset[0].regions.length) * (idx + 1);
-                })
-                .text(function(d,i){
-                    return d.name
-                })    
             }
             
             function buildLineHeader(){
@@ -501,39 +547,13 @@
                 .attr("height", height + margin.top + margin.bottom);
             }
 
-            var mouseOver = function(selectorclass){
-                d3.selectAll('.'+selectorclass+'_line:not(.line-click)')
-                .classed('line-no-accent', false)
-                .classed('line-accent', true)
-                d3.selectAll('.'+selectorclass+'_text:not(.label-click)')
-                .classed('label-no-accent', false)
-                .classed('label-accent', true)
-            }
-            var mouseOut = function(selectorclass){
-                d3.selectAll('.'+selectorclass+'_line:not(.line-click)')
-                .classed('line-accent', false)
-                .classed('line-no-accent', true)
-                d3.selectAll('.'+selectorclass+'_text:not(.label-click)')
-                .classed('label-no-accent', true)
-                .classed('label-accent', false)
-            }
-            var click = function(selectorclass){
-                var line = d3.selectAll('.'+selectorclass+'_line');
-                line.classed('line-click', !line.classed("line-click"))
-                
-                var labels = d3.selectAll('.'+selectorclass+'_text')
-                labels.classed('label-click', function(label, i){
-                    return !d3.select(this).classed("label-click")
-                })
-            }
-       
             buildLineHeader()
             
             var svg = createMainSVG()
             
             drawCurrentYearRectangle()
             
-            assignRankToRegion()
+            assignRankToRegion(comparedValue)
             
             buildLines()
             
@@ -541,8 +561,26 @@
             
             buildYearText()
             
-            buildLineText()
+            buildLineText(comparedValue)
             
+        }
+        
+        function updateRankChart(comparedValue){
+            
+            //Erase old values
+            d3.selectAll("body svg.viz path").remove()
+            d3.selectAll("body svg.viz g").remove()
+            d3.selectAll("body svg.viz defs").remove()
+            d3.selectAll("body svg.titleHeader").remove()
+            d3.selectAll("body div.topYear").remove()
+            
+            assignRankToRegion(comparedValue)
+
+            buildLines()
+
+            buildEndLineHeader()
+            
+            buildLineText(comparedValue)
         }
     </script>
 </body>
