@@ -9,7 +9,7 @@
         // -------- CONFIGURATION ----------
         // ---------------------------------
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
-            width = 800 - margin.left - margin.right,
+            width = 700 - margin.left - margin.right,
             height = 600 - margin.top - margin.bottom,
             header = 20,
             innerheight = height - header,
@@ -401,7 +401,7 @@
             function drawCurrentYearRectangle(){
                 //Draw the Rectangle
                 var rectangle = svg.append("rect")
-                .attr("x", 0)
+                .attr("x", 10)
                 .attr("y", margin.top)
                 .attr("rx", 10)
                 .attr("ry", 10)
@@ -412,7 +412,7 @@
                 .attr("fill","white")
             }
             
-            function buildLineHeader(){
+            function buildEndLineHeader(){
                 var lineHeader = d3.select("body")
                 .append("svg")
                 .classed("titleHeader", true)
@@ -429,6 +429,26 @@
                 })
                 .text(function(d,i){
                     return d.name
+                })    
+            }
+            
+            function buildLineHeader(){
+                var lineHeader = d3.select("body")
+                .append("svg")
+                .classed("rankHeader", true)
+                .selectAll(".rankHeader")
+                .data(dataset[0].regions)
+                .enter()
+                .append("text")
+                .classed("lineHeader", true)
+                .attr("x", function(d, idx){
+                    return 0;
+                })
+                .attr("y", function(d, idx){
+                    return header + (innerheight / dataset[0].regions.length) * (idx + 1);
+                })
+                .text(function(d,i){
+                    return "#"+(i+1)
                 })    
             }
             
@@ -468,9 +488,9 @@
             var rectSlide = function(idx){
                 var rect = d3.select("rect");
                 rect.transition()
-                .attr("x", (metricwidth * idx));
+                .attr("x", 10 + (metricwidth * idx));
             }
-            
+       
             buildLineHeader()
             
             var svg = createMainSVG()
@@ -480,6 +500,8 @@
             assignRankToRegion()
             
             buildLines()
+            
+            buildEndLineHeader()
             
             buildYearText()
             
