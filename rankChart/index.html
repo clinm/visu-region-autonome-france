@@ -360,11 +360,19 @@
                 return key;})
             .on("click", function(d,i){
                 d3.selectAll(".topYear")
+                .selectAll("h2")
+                .data([dataset[i]])
+                .text(function(year, i){
+                    return "Classement "+year.year
+                })
+                
+                d3.selectAll(".topYear")
                 .selectAll("p")
                 .data(dataset[i].regions)
                 .text(function(d,i){
                     return "#" + (i+1) + "  " + d.name
                 })
+                
                 rectSlide(i);
             })
             
@@ -410,7 +418,17 @@
             var topYear = d3.select("body")
             .append("div")
             .classed("topYear", true)
-            .selectAll("p")
+            
+            topYear.selectAll("h2")
+            .data([dataset[0]])
+            .enter()
+            .append("h2")
+            .text(function(year, i){
+                console.log(year)
+                return "Classement "+year.year
+            })
+            
+            topYear.selectAll("p")
             .data(dataset[0].regions)
             .enter()
             .append("p")
