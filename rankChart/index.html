@@ -16,9 +16,11 @@
             linePadding = 20,
             dataset,
             lookup,
+            indexCurrentYear,
             value = "diff",
             negativeColor = "rgb(255,0,0)",
-            positiveColor = "rgb(0,255,0)";
+            positiveColor = "rgb(0,255,0)",
+            currentYear = "2008";
         
         // ---------------------------------
         // --------------- MAIN ------------
@@ -31,8 +33,10 @@
             dataset = orderByRank(dataset)
             //dataset = orderByDescendingYear(dataset)
 
+            indexCurrentYear = findIndexYear(currentYear);
+            
             //Store regions of the first year
-            var metriclist = dataset[0].regions;
+            var metriclist = dataset[indexCurrentYear].regions;
             lookup = [];
             metriclist.forEach(function(rec,idx){
                 var o = {};
@@ -54,6 +58,17 @@
         // ---------------------------------
         // ---------------------------------
 
+        //Function to find index of a given year
+        function findIndexYear(year){
+            var ret;
+            dataset.forEach(function(y, i){
+                if (y.year == year){
+                    ret = i
+                }
+            })
+            return ret
+        }
+        
         //Function to order regions by ascending rank into each year
         function orderByRank(data){
             data.forEach(function(oneYear, index){
@@ -103,13 +118,13 @@
             .classed("topYear", true)
 
             topYear.selectAll("h2")
-            .data([dataset[0]])
+            .data([dataset[indexCurrentYear]])
             .enter()
             .append("h2")
             .call(setTOPTitle)
 
             topYear.selectAll("p")
-            .data(dataset[0].regions)
+            .data(dataset[indexCurrentYear].regions)
             .enter()
             .append("p")
             .call(setRankText)
@@ -401,7 +416,7 @@
             function drawCurrentYearRectangle(){
                 //Draw the Rectangle
                 var rectangle = svg.append("rect")
-                .attr("x", 10)
+                .attr("x", 10 + (metricwidth * indexCurrentYear))
                 .attr("y", margin.top)
                 .attr("rx", 10)
                 .attr("ry", 10)
@@ -417,7 +432,7 @@
                 .append("svg")
                 .classed("titleHeader", true)
                 .selectAll('.lineHeader')
-                .data(dataset[0].regions)
+                .data(dataset[dataset.length-1].regions)
                 .enter()
                 .append("text")
                 .classed("lineHeader", true)
