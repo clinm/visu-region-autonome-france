@@ -1,20 +1,31 @@
 var dataset;
+var par;
 
 //Define bar chart function
-function barChart(dataset){
-
+function barChart(dataset, par){
     //Set width and height as fixed variables
-    var w = 1200;
-    var h = 500;
+    var w = 600;
+    var h = 600;
     var padding = 50;
+    var wAxeY = 100;
+    var hAxeX = 200;
 
+    var yDomain = d3.extent(dataset, function(d){ return d[par] });
+    
+    var yRangeBegin = 0;
+    if(yDomain[0] >= 0){
+        yRangeBegin = h - hAxeX;
+        yDomain[0] = 0;
+    }else {
+        yRangeBegin = h;
+    }
     //Scale function for axes and radius
-    var yScale = d3.scaleSqrt()
-        .domain(d3.extent(dataset, function(d){return d.diff;}))
-        .range([h+padding, padding]);
+    var yScale = d3.scalePow()
+        .domain(yDomain)
+        .range([yRangeBegin, 0]);
 
     var xScale = d3.scaleBand()
-            .rangeRound([padding, w - padding])
+            .rangeRound([wAxeY, w])
             .padding(0.1)
             .domain(dataset.map(function(d){ return d.name;}));
 
@@ -48,22 +59,22 @@ function barChart(dataset){
         .data(dataset, key)
         .enter()
         .append("rect")
-        .attr("class", function(d){return d.diff < 0 ? "negative" : "positive";})
+        .attr("class", function(d){return d[par] < 0 ? "negative" : "positive";})
         .attr("x", function(d){
                 return xScale(d.name);
             })
         .attr("y", function(d){
-                return yScale(Math.max(0, d.diff));
+                return yScale(Math.max(0, d[par]));
             })
         .attr("width", xScale.bandwidth())
         .attr("height", function(d){
-                return Math.abs(yScale(d.diff) - yScale(0));
+                return Math.abs(yScale(d[par]) - yScale(0));
             });
 
     //Add y-axis
     svg.append("g")
         .attr("class", "y-axis")
-        .attr("transform", "translate("+ padding + ",0)")
+        .attr("transform", "translate("+ wAxeY + ",0)")
         .call(yAxis);
 
     var labels = svg.append("g")
@@ -75,12 +86,12 @@ function barChart(dataset){
         .attr("transform", "rotate(-90)")
         .attr("dy", 10);
 
-    labels.filter(function(d, i) { return dataset[i].diff > 0.0})
+    labels.filter(function(d, i) { return dataset[i][par]>= 0.0})
         .style("text-anchor", "end")
         .attr("dx", -10);
 
 
-    labels.filter(function(d, i) { return !(dataset[i].diff > 0.0)})
+    labels.filter(function(d, i) { return !(dataset[i][par]>= 0.0)})
         .style("text-anchor", "start")
         .attr("dx", 10);
 
@@ -113,20 +124,22 @@ function barChart(dataset){
         var sort = d3.select(".checkbox");
 
         if (sort.node().checked) {
-            return function(a,b){return b.diff - a.diff;};
+            return function(a,b){return b[par] - a[par];};
         } else {
             return function(a,b){return d3.ascending(a.name, b.name);};
         }
     }
-
 }
+
+
+
 
 //Load data and call bar chart function
 d3.json("diff.json", function(error,data){
     if(error){
         console.log(error);
-    }
-    else{
-        barChart(data[0]["regions"]);
+    }else{
+        var val = d3.select('input[name="choice"]:checked').attr('value')
+        barChart(data[1]["regions"], val);
     }
 });
