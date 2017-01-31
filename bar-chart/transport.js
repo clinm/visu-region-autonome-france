@@ -7,7 +7,8 @@ var settings = {
     hAxeX: 200,
     containerId: "#chart-container",
     sorted: false,
-    selectedYear: 0
+    selectedYear: 0,
+    duration: 500
 };
 
 var conf;
@@ -82,8 +83,6 @@ function barChart(dataset, settings){
                     return yScale(Math.max(0, d[displayValue]));
                 })
             .attr("width", xScale.bandwidth())
-            // .transition()
-            // .duration(500)
             .attr("height", function(d){
                     return Math.abs(yScale(d[displayValue]) - yScale(0));
             });
@@ -98,6 +97,8 @@ function barChart(dataset, settings){
 
     svg.selectAll("rect")
         .data(data, key)
+        .transition()
+        .duration(settings.duration)
         .call(barPositionPipeline);
 
 
@@ -117,6 +118,8 @@ function barChart(dataset, settings){
     if (xAxisDom.size()) {
         labels = xAxisDom
             .attr("transform", "translate(0, "+ yScale(0) + ")")
+            .transition()
+            .duration(settings.duration)
             .call(xAxis)
             .selectAll("text");
     } else {
