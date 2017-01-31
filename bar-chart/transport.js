@@ -40,8 +40,18 @@ function barChart(dataset, settings){
 
     var data = dataset[settings.selectedYear]["regions"].sort(sortChoice(settings.sorted));
 
-    var yDomain = d3.extent(data, function(d){ return d[displayValue] });
-    
+    //
+    // returns an array of arrays where each element represents [min, max] for
+    // the given year
+    var extentEach = d3.extent(dataset, function(d) {
+        return d3.extent(d["regions"], function(a) {
+            return a[displayValue];
+        });
+    });
+
+    // merges arrays and retrieves global [min, max]
+    var yDomain = d3.extent(d3.merge(extentEach));
+
     var yRangeBegin = 0;
     if(yDomain[0] >= 0){
         yRangeBegin = h - hAxeX;
