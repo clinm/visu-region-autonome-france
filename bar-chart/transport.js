@@ -8,6 +8,9 @@ var settings = {
     containerId: "#chart-container"
 };
 
+var conf;
+
+
 function createChart(settings) {
     //Create svg element
     d3.select(settings.containerId).append("svg")
@@ -64,46 +67,77 @@ function barChart(data, settings){
     var state = d3.selectAll("option");
     var svg = d3.select(settings.containerId).select("#chart");
     //Create barchart
+
+    var barPositionPipeline = function(selection) {
+        selection.attr("class", function(d){return d[displayValue] < 0 ? "negative" : "positive";})
+            .attr("x", function(d){
+                    return xScale(d.name);
+                })
+
+            .attr("y", function(d){
+                    return yScale(Math.max(0, d[displayValue]));
+                })
+            .attr("width", xScale.bandwidth())
+            // .transition()
+            // .duration(500)
+            .attr("height", function(d){
+                    return Math.abs(yScale(d[displayValue]) - yScale(0));
+            });
+    };
+
+
     svg.selectAll("rect")
         .data(data, key)
         .enter()
         .append("rect")
-        .attr("class", function(d){return d[displayValue] < 0 ? "negative" : "positive";})
-        .attr("x", function(d){
-                return xScale(d.name);
-            })
-        .attr("y", function(d){
-                return yScale(Math.max(0, d[displayValue]));
-            })
-        .attr("width", xScale.bandwidth())
-        .attr("height", function(d){
-                return Math.abs(yScale(d[displayValue]) - yScale(0));
-            });
+        .call(barPositionPipeline);
 
-    //Add y-axis
-    svg.append("g")
-        .attr("class", "y-axis")
-        .attr("transform", "translate("+ wAxeY + ",0)")
-        .call(yAxis);
+    svg.selectAll("rect")
+        .data(data, key)
+        .call(barPositionPipeline);
 
-    var labels = svg.append("g")
-        .attr("class", "x-axis")
-        .attr("transform", "translate(0, "+ yScale(0) + ")")
-        .call(xAxis)
-        .selectAll("text")
-        .style("alignment-baseline", "middle")
-        .attr("transform", "rotate(-90)")
-        .attr("dy", 10);
 
-    labels.filter(function(d, i) { return data[i][displayValue]>= 0.0})
+    var yAxisDom = svg.select(".y-axis");
+    if (yAxisDom.size()) {
+        yAxisDom.call(yAxis)
+    } else {
+        //Add y-axis
+        svg.append("g")
+            .attr("class", "y-axis")
+            .attr("transform", "translate("+ wAxeY + ",0)")
+            .call(yAxis);
+    }
+
+    var xAxisDom = svg.select(".x-axis");
+    if (xAxisDom.size()) {
+        var labels = xAxisDom
+            .attr("transform", "translate(0, "+ yScale(0) + ")")
+            .call(xAxis)
+            .selectAll("text");
+    } else {
+        var labels = svg.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", "translate(0, "+ yScale(0) + ")")
+            .call(xAxis)
+            .selectAll("text")
+            .style("alignment-baseline", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("dy", 10);
+    }
+
+
+    function isPositive(i) {
+        return data[i][displayValue]>= 0.0
+    }
+
+    labels.filter(function(d, i) { return isPositive(i)})
         .style("text-anchor", "end")
         .attr("dx", -10);
 
 
-    labels.filter(function(d, i) { return !(data[i][displayValue]>= 0.0)})
+    labels.filter(function(d, i) { return !isPositive(i); })
         .style("text-anchor", "start")
         .attr("dx", 10);
-
     //Sort data when sort is checked
     d3.selectAll(".checkbox").
     on("change", function(){
@@ -149,7 +183,7 @@ d3.json("diff.json", function(error,data){
     if(error){
         console.log(error);
     }else{
-        var conf = $.extend({}, settings);
+        conf = $.extend({}, settings);
         conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
 
         createChart(conf);
