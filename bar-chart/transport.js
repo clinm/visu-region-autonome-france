@@ -6,7 +6,8 @@ var settings = {
     wAxeY: 100,
     hAxeX: 200,
     containerId: "#chart-container",
-    sorted: false
+    sorted: false,
+    selectedYear: 0
 };
 
 var conf;
@@ -28,7 +29,7 @@ function createChart(settings) {
 }
 
 //Define bar chart function
-function barChart(data, settings){
+function barChart(dataset, settings){
     //Set width and height as fixed variables
     var w = settings.w;
     var h = settings.h;
@@ -36,7 +37,7 @@ function barChart(data, settings){
     var hAxeX = settings.hAxeX;
     var displayValue = settings.displayValue;
 
-    data = data.sort(sortChoice(settings.sorted));
+    var data = dataset[settings.selectedYear]["regions"].sort(sortChoice(settings.sorted));
 
     var yDomain = d3.extent(data, function(d){ return d[displayValue] });
     
@@ -166,16 +167,29 @@ d3.json("diff.json", function(error,data){
         conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
 
         createChart(conf);
-        barChart(data[1]["regions"], conf);
+        barChart(data, conf);
     }
+
+    d3.select("#year")
+        .selectAll('option')
+        .data(data)
+        .enter()
+        .append('option')
+        .attr('value', function(d, i) {return i})
+        .text(function(d) {return d.year});
 
     $('input[name="choice"]').on('change', function() {
         conf.displayValue = $(this).attr('value');
-        barChart(data[1]["regions"], conf);
+        barChart(data, conf);
     });
 
     $('.checkbox').on('change', function() {
         conf.sorted = $(this).is(':checked');
-        barChart(data[1]["regions"], conf);
+        barChart(data, conf);
+    });
+
+    $('#year').on('change', function() {
+        conf.selectedYear = $(this).val();
+        barChart(data, conf);
     });
 });
