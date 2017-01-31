@@ -11,8 +11,9 @@ body {
 }
 
 .titleHeader{
-    width: 270px;
-    height: 800px;
+    min-width: 177px;
+    max-width: 177px;
+    height: 600px;
 }
 
 .headertext {
@@ -55,5 +56,14 @@ body {
 }
 
 .lineHeader {
-    font-size: 13px;
+    font-size: 11px;
+}
+
+.topYear {
+    border: 1px solid black;
+    line-height: 6px;
+    font-size: 12px;
+    max-height: fit-content;
+    min-width: fit-content;
+    align-self: center;
 }
