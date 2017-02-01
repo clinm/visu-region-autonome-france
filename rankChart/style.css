@@ -65,6 +65,10 @@ body {
     font-size: 11px;
 }
 
+.header-accent, .header-click {
+    font-weight: bold;
+}
+
 .topYear {
     border: 1px solid black;
     line-height: 6px;

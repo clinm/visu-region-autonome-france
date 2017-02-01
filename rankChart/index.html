@@ -296,6 +296,9 @@
             d3.selectAll('.'+selectorclass+'_text:not(.label-click)')
             .classed('label-no-accent', false)
             .classed('label-accent', true)
+            d3.selectAll('.'+selectorclass+'_header:not(.header-click)')
+            .classed('header-no-accent', false)
+            .classed('header-accent', true)
         }
         var mouseOut = function(selectorclass){
             d3.selectAll('.'+selectorclass+'_line:not(.line-click)')
@@ -304,6 +307,9 @@
             d3.selectAll('.'+selectorclass+'_text:not(.label-click)')
             .classed('label-no-accent', true)
             .classed('label-accent', false)
+            d3.selectAll('.'+selectorclass+'_header:not(.header-click)')
+            .classed('header-no-accent', true)
+            .classed('header-accent', false)
         }
         var click = function(selectorclass){
             var line = d3.selectAll('.'+selectorclass+'_line');
@@ -313,6 +319,9 @@
             labels.classed('label-click', function(label, i){
                 return !d3.select(this).classed("label-click")
             })
+            
+            var header = d3.select("."+selectorclass+"_header");
+            header.classed('header-click', !header.classed("header-click"))
         }
         
         // create the lines from the index values
@@ -459,6 +468,9 @@
             .data(dataset[dataset.length-1].regions)
             .enter()
             .append("text")
+            .attr("class", function(r,i){
+                return r.name.replace(/\s/g,'')+"_header"
+            })
             .classed("lineHeader", true)
             .attr("x", function(d, idx){
                 return 0;
