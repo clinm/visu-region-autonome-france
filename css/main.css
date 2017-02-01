@@ -229,9 +229,6 @@ margin-top: -250px;
   border-bottom: 1px solid #e9e9e9;
   position: relative;
 }
-.box.last {
-  border-radius: 0 0 5px 5px;
-}
 .box h2 {
   padding: 10px 30px;
   display: inline-block;
@@ -240,27 +237,18 @@ margin-top: -250px;
   margin-bottom: 30px;
   font-size: 48px;
 }
-#rank-chart .box {
+#Classement.box {
   background: #f3f3f3;
 }
 
-
-#pricing .box {
+#Historique .box {
   background-color: #f9f9f9;
 }
-#tableau .plan {
-  background: #fff;
-  list-style: none;
-  margin: 0 0 20px;
-  text-align: center;
-  padding: 0;
-  border-bottom: 1px solid #e1e1e1;
-}
 
-#bar-chart.box {
+#Detail.box {
   padding-bottom: 0;
 }
-#bar-chart.row > div {
+##Detail.row > div {
   margin-bottom: 20px;
 }
 .center {
@@ -318,17 +306,4 @@ margin-top: -250px;
 .navbar-default .navbar-nav > li:focus > a:focus {
   background-color: ;
   color: #060606;
-}
-
-.
-#footer {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  color: #999;
-}
-#footer a {
-  color: #999;
-}
-#footer a:hover {
-  color: #52b6ec;
 }
