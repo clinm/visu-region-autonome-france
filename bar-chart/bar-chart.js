@@ -9,7 +9,8 @@ CHART.settings = {
     containerId: "#chart-container",
     sorted: false,
     selectedYear: 0,
-    duration: 500
+    duration: 500,
+    title: "Default title"
 };
 
 CHART.chart = function(dataset, params) {
@@ -164,11 +165,21 @@ CHART.chart = function(dataset, params) {
 
         handleAxes();
 
+        d3.select(params.containerId)
+            .select("h1")
+            .classed("bar-chart-title", true)
+            .text(params.title);
+
+
     };
 
     var createChart = function() {
         //Create svg element
         var padding = 2 * params.padding;
+
+        d3.select(params.containerId)
+            .append("h1")
+            .text(params.title);
 
         d3.select(params.containerId).append("svg")
             .attr("width", params.w + padding).attr("height", params.h + padding)
@@ -182,6 +193,9 @@ CHART.chart = function(dataset, params) {
         create: createChart,
         getConf: function() {
             return params;
+        },
+        getData: function() {
+            return dataset;
         },
         createSelect: function(selectID) {
             d3.select(selectID)
@@ -199,21 +213,43 @@ CHART.chart = function(dataset, params) {
 };
 
 CHART.bindToDom = function(queries, chart) {
+
+    function createTitle() {
+        var displayedValue = {
+            "prod": "Production",
+            "cons": "Consommation",
+            "diff": "Excédent"
+        };
+
+        var conf = chart.getConf();
+        var title = displayedValue[conf.displayValue];
+
+        var year = chart.getData()[conf.selectedYear].year;
+        title += " en " + year;
+
+        conf.title = title;
+    }
+
+    createTitle();
+
     $(queries.display_value).on('change', function() {
         var conf = chart.getConf();
         conf.displayValue = $(this).attr('value');
+        createTitle();
         chart.update(conf);
     });
 
     $(queries.sorted).on('change', function() {
         var conf = chart.getConf();
         conf.sorted = $(this).is(':checked');
+        createTitle();
         chart.update(conf);
     });
 
     $(queries.years).on('change', function() {
         var conf = chart.getConf();
         conf.selectedYear = $(this).val();
+        createTitle();
         chart.update(conf);
     });
 };
