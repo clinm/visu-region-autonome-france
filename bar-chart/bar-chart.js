@@ -131,6 +131,10 @@ CHART.chart = function(dataset, params) {
         }else {
             yRangeBegin = params.h + params.padding;
         }
+
+        // closest thousand up
+        yDomain[1] = Math.ceil(yDomain[1] / 1000) * 1000;
+
         //Scale function for axes and radius
         yScale = d3.scalePow()
             .domain(yDomain)
