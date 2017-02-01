@@ -14,6 +14,13 @@
     <script src="rankChart/object-watch.js"></script>
     <script src="rankChart/rankChart.js"></script>
 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+
+    
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -128,15 +135,27 @@
         </div>
     </footer><!--/#footer-->
     <script>
+        var queries = {
+            display_value: 'input[name="choice"]',
+            sorted: '#sort',
+            years: '#year'
+        };
+        
         runRankChart({
-            currentYear: "2005",
+            currentYear: "1990",
             comparedValue: "diff",
             selection: ["LORRAINE", "ILE DE FRANCE"],
             dataPath: "rankChart/data.json",
             DOMcontainer: "#rank-chart"
         })
-    </script>
-    <script>
+        
+        $(queries.display_value).on('change', function() {
+            confRankChart.comparedValue = $(this).val()
+        });
+
+        $(queries.years).on('change', function() {
+            confRankChart.currentYear = $(queries.years + " option:selected").text()
+        });
 
         //Load data and call bar chart function
         d3.json("bar-chart/diff.json", function(error,data){
@@ -152,24 +171,11 @@
                 c.update(conf);
                 c.createSelect("#year");
 
-                var queries = {
-                    display_value: 'input[name="choice"]',
-                    sorted: '#sort',
-                    years: '#year'
-                };
-
                 CHART.bindToDom(queries, c);
             }
 
         });
 
     </script>
-
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-
 </body>
 </html>
