@@ -7,10 +7,14 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
   
     <link href="css/main.css" rel="stylesheet">
+    <link href="rankChart/style.css" rel="stylesheet">
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="bar-chart/bar-chart.js"></script>
+    <script src="rankChart/object-watch.js"></script>
+    <script src="rankChart/rankChart.js"></script>
+
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
@@ -132,6 +136,16 @@
             </div>
         </div>
     </footer><!--/#footer-->
+    <script>
+        var confRankChart = {
+            currentYear: "2005",
+            comparedValue: "diff",
+            selection: ["LORRAINE", "ILE DE FRANCE"],
+            dataPath: "rankChart/data.json",
+            DOMcontainer: "#rank-chart .box"
+        }
+        runRankChart(confRankChart)
+    </script>
     <script>
 
         //Load data and call bar chart function

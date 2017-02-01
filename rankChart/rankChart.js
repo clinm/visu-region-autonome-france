@@ -166,7 +166,7 @@ function colorizedLines(comparedValue){
     }
 
     //create def node for linear gradient definitions
-    var colorDefs = d3.select("svg.viz")
+    var colorDefs = d3.select(conf.DOMcontainer+" svg.viz")
     .append("defs")
     .selectAll("linearGradient")
     .data(lookup)
@@ -265,7 +265,7 @@ function colorizedLines(comparedValue){
 }
 
 function rectSlide(idx){
-    var rect = d3.select("rect");
+    var rect = d3.select(conf.DOMcontainer+" rect");
     rect.transition()
     .attr("x", 10 + (metricwidth * idx));
 }
