@@ -458,6 +458,10 @@ a:focus {
 .icon-social:hover {
   color: #fff;
 }
+.navba{
+
+
+}
 .navbar-default {
   background: #fff;
   border-radius: 0 0 5px 5px;
@@ -467,6 +471,8 @@ a:focus {
   -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   overflow: hidden;
+  height: 55px;
+  width:1140px;
 }
 .navbar-default .first a {
   border-radius: 0 0 0 5px;
@@ -474,16 +480,17 @@ a:focus {
 .navbar-default .navbar-brand {
   margin-right: 50px;
   margin-left: 20px;
-  width: 200px;
-  height: 78px;
+  width: 100px;
+  height: 60px;
   background: url(../images/logo.jpg) no-repeat 0 50%;
+
 }
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
 }
 .navbar-default .navbar-nav > li > a {
-  padding: 30px 25px;
-  font-size: 16px;
+  padding: 23px 40px;
+  font-size: 18px;
   line-height: 18px;
   color: #999;
 }
