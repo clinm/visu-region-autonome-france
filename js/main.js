@@ -26,6 +26,7 @@ jQuery(function($) {
 		}, 500);
 	});
 
+
 	//scrollspy
 	$('[data-spy="scroll"]').each(function () {
 		var $spy = $(this).scrollspy('refresh')
