@@ -15,7 +15,8 @@ var margin = {top: 10, right: 1, bottom: 10, left: 10},
     positiveColor = "rgb(0,255,0)",
     conf = {
         currentYear: "2008",
-        comparedValue: "diff"
+        comparedValue: "diff",
+        selection: ["LORRAINE", "PICARDIE"]
     };
 
 // ---------------------------------
@@ -60,6 +61,11 @@ var datasource = d3.json("data.json",function(error,data){
     // add colors to lines compare to compared value
     colorizedLines(conf.comparedValue)
 
+    //Auto-select from conf
+    conf.selection.forEach(function(val, i){
+        selectRegion(val.replace(/\s/g,''), true)
+    })
+    
     //Set Watchers
     watchThings()
 });
@@ -73,6 +79,8 @@ function watchThings(){
         changeCurrentYear(indexCurrentYear);
 
         rectSlide(indexCurrentYear);
+        
+        return val;
     })
 
     conf.watch('comparedValue', function(property, oldval, val){
@@ -84,8 +92,22 @@ function watchThings(){
         makeTOP();
 
         changeCurrentYear(indexCurrentYear);
+        
+        return val;
     })
 
+    conf.watch('selection', function(property, oldarray, array){
+        lookup.forEach(function(val, i){
+            selectRegion(val.metric.replace(/\s/g,''), false)
+        })
+        
+        array.forEach(function(val, i){
+            selectRegion(val.replace(/\s/g,''), true)
+        })
+        
+        return array;
+    })
+    
     //            conf.watch('negativeColor', function(property, oldval, val){
     //
     //            })
@@ -281,6 +303,45 @@ function rectSlide(idx){
     .attr("x", 10 + (metricwidth * idx));
 }
 
+function addOrRemoveSelection(region){
+    var newSelection = [],
+        regionAlreadySelected = false;
+    
+    conf.selection.forEach(function(item, i){
+        if (item != region)
+            newSelection.push(item)
+        else
+            regionAlreadySelected = true;
+    })
+    
+    if (!regionAlreadySelected)
+        newSelection.push(region)
+
+    conf.selection = newSelection.slice(0)
+}
+
+function selectRegion(selector, toggle){
+    var value,
+        selectorclass = selector.replace(/\s/g,'')
+    
+    if (toggle == undefined){
+        value = !d3.select('.'+selectorclass+'_line').classed("line-click")    
+    }
+    else{
+        value = toggle
+    }
+
+    var line = d3.selectAll('.'+selectorclass+'_line');
+    line.classed('line-click', value)
+
+    var labels = d3.selectAll('.'+selectorclass+'_text')
+    labels.classed('label-click', value)
+
+    var header = d3.select("."+selectorclass+"_header");
+    header.classed('header-click', value)
+    
+}
+
 var mouseOver = function(selectorclass){
     d3.selectAll('.'+selectorclass+'_line:not(.line-click)')
     .classed('line-no-accent', false)
@@ -303,17 +364,8 @@ var mouseOut = function(selectorclass){
     .classed('header-no-accent', true)
     .classed('header-accent', false)
 }
-var click = function(selectorclass){
-    var line = d3.selectAll('.'+selectorclass+'_line');
-    line.classed('line-click', !line.classed("line-click"))
-
-    var labels = d3.selectAll('.'+selectorclass+'_text')
-    labels.classed('label-click', function(label, i){
-        return !d3.select(this).classed("label-click")
-    })
-
-    var header = d3.select("."+selectorclass+"_header");
-    header.classed('header-click', !header.classed("header-click"))
+var click = function(selector){
+    addOrRemoveSelection(selector)
 }
 
 // create the lines from the index values
@@ -399,8 +451,8 @@ function buildLineText(comparedValue){
         })
         .on("mouseover", function(d){mouseOver(d.name.replace(/\s/g,''))})
         .on("mouseout", function(d){mouseOut(d.name.replace(/\s/g,''))})
-        .on("click", function(d){click(d.name.replace(/\s/g,''))})
-        })
+        .on("click", function(d){click(d.name)})
+    })
 }
 
 function buildLines(){
@@ -421,8 +473,8 @@ function buildLines(){
     })
     .on("mouseover", function(d){mouseOver(d.metric.replace(/\s/g,''))})
     .on("mouseout", function(d){mouseOut(d.metric.replace(/\s/g,''))})
-    .on("click", function(d){click(d.metric.replace(/\s/g,''))})
-    }
+    .on("click", function(d){click(d.metric)})
+}
 
 
 function assignRankToRegion(comparedValue){
@@ -505,7 +557,7 @@ function buildRankChart(comparedValue){
             changeCurrentYear(i)
             rectSlide(i);
         })    
-        }
+    }
 
     function drawCurrentYearRectangle(){
         //Draw the Rectangle
@@ -519,7 +571,7 @@ function buildRankChart(comparedValue){
         .attr("stroke", "lightgrey")
         .attr("stroke-width",2)
         .attr("fill","white")
-        }
+    }
 
     function buildLineHeader(){
         var lineHeader = d3.select("body")
@@ -539,7 +591,7 @@ function buildRankChart(comparedValue){
         .text(function(d,i){
             return "#"+(i+1)
         })    
-        }
+    }
 
     function createMainSVG(){
         return d3.select("body")

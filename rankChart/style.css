@@ -33,7 +33,7 @@ body {
     fill: none;
 }
 
-.line-accent {
+.line-accent, .line-click {
     stroke-width: 5;
     fill: none;
 }
@@ -43,13 +43,13 @@ body {
     fill: #bbb;
 }
 
-.label-accent {
+.label-accent, .label-click {
     font-size: 13px;
     fill: cornflowerblue;
     display: block;
 }
 
-.label-no-accent {
+.label-no-accent:not(.label-click) {
     display: none;
 }
 
