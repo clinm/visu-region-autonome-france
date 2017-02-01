@@ -3,8 +3,20 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="style.css">
 <body>
+    <div id="rank-chart"></div>
     <script src="http://d3js.org/d3.v4.min.js"></script>
     <script src="object-watch.js"></script>
     <script src="rankChart.js"></script>
+    <script>
+        var confRankChart = {
+            currentYear: "2009",
+            comparedValue: "diff",
+            selection: ["LORRAINE", "ILE DE FRANCE"],
+            dataPath: "data.json",
+            DOMcontainer: "#rank-chart"
+        }
+        runRankChart(confRankChart)
+    </script>
+    
 </body>
 </html>
