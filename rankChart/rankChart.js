@@ -11,7 +11,7 @@ var confRankChart = {
         positiveColor: "rgb(0,255,0)"
 };
 
-function runRankChart(userConf, callbackChangeYear){
+function runRankChart(userConf, callbackChangeYear, callbackChangeSelection){
     
     var margin = {top: 10, right: 1, bottom: 10, left: 10},
         width = 700 - margin.left - margin.right,
@@ -23,7 +23,8 @@ function runRankChart(userConf, callbackChangeYear){
         lookup,
         metricwidth,
         indexCurrentYear,
-        callbackChangeYear = callbackChangeYear;
+        callbackChangeYear = callbackChangeYear,
+        callbackChangeSelection = callbackChangeSelection;
     
     // ---------------------------------
     // --------------- MAIN ------------
@@ -281,14 +282,19 @@ function addOrRemoveSelection(region){
         regionAlreadySelected = false;
     
     confRankChart.selection.forEach(function(item, i){
-        if (item != region)
+        if (item != region) {
             newSelection.push(item)
-        else
+        }
+        else {
             regionAlreadySelected = true;
+            callbackChangeSelection(region, false);
+        }
     })
     
-    if (!regionAlreadySelected)
+    if (!regionAlreadySelected){
         newSelection.push(region)
+        callbackChangeSelection(region, true);
+    }
 
     confRankChart.selection = newSelection.slice(0)
 }

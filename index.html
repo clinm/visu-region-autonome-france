@@ -138,18 +138,18 @@
     </footer>
     <script>
         var queries = {
-            display_value: 'input[name="choice"]',
-            sorted: '#sort',
-            years: '#year'
-        };
+                display_value: 'input[name="choice"]',
+                sorted: '#sort',
+                years: '#year'
+            },
+            selections = [];
         
         runRankChart({
             currentYear: "1990",
             comparedValue: "diff",
-            selection: ["LORRAINE", "ILE DE FRANCE"],
             dataPath: "rankChart/data.json",
             DOMcontainer: "#rank-chart"
-        }, callbackChangeYear)
+        }, callbackChangeYear, callbackChangeSelection)
         
         $(queries.display_value).on('change', function() {
             confRankChart.comparedValue = $(this).val()
@@ -184,6 +184,21 @@
                     $("#year").val(index);
                     $("#year").change();
             })
+        }
+        
+        function callbackChangeSelection(region, addOrRemove){
+            if (addOrRemove){
+                selections.push(region)
+            }
+            else{
+                selections.forEach(function(r, i){
+                    if (r == region)
+                        selections.splice(i, 1);
+                })
+            }
+            
+            confRankChart.selection = selections.slice(0);
+            //TODO call change in bar chart
         }
         
     </script>
