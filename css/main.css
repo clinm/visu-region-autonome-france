@@ -82,104 +82,28 @@ width: 80px
   background-repeat: no-repeat;
   padding: 200px 0;
   color: #fff;
+  padding-top: 100px;
+  padding-bottom: 50px
 }
-#main-slider .item {
-  -moz-transition: opacity ease-in-out 500ms;
-  -o-transition: opacity ease-in-out 500ms;
-  -webkit-transition: opacity ease-in-out 500ms;
-  transition: opacity ease-in-out 500ms;
-  left: 0 !important;
-  opacity: 0;
-  top: 0;
-  position: absolute;
-  width: 100%;
-  display: block !important;
-  z-index: 1;
-  text-align: center;
-}
-#main-slider .item:first-child {
-  top: auto;
-  position: relative;
-}
-#main-slider .item.active {
-  opacity: 1;
-  -moz-transition: opacity ease-in-out 500ms;
-  -o-transition: opacity ease-in-out 500ms;
-  -webkit-transition: opacity ease-in-out 500ms;
-  transition: opacity ease-in-out 500ms;
-  z-index: 2;
-}
-#main-slider .item.active h1 {
-  -webkit-animation: scaleUp 400ms;
-  -moz-animation: scaleUp 400ms;
-  -o-animation: scaleUp 400ms;
-  -ms-animation: scaleUp 400ms;
-  animation: scaleUp 400ms;
-}
-#main-slider .prev,
-#main-slider .next {
-  position: absolute;
-  top: 50%;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: #fff;
-  display: inline-block;
-  margin-top: -50px;
-  font-size: 24px;
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
-  text-align: center;
-  border-radius: 4px;
-  z-index: 5;
-}
-#main-slider .prev:hover,
-#main-slider .next:hover {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-#main-slider .prev {
-  left: 10px;
-}
-#main-slider .next {
-  right: 10px;
-}
+
 #main-slider h1 {
-  font-size: 68px;
+  font-size: 40px;
   text-shadow: 0 3px rgba(0, 0, 0, 0.1);
-  color: #fff;
+  color: #3e332d;
+  text-align: center;
+
 }
-#contact .box {
-  background-color: #222;
-  color: #999;
+.carousel-content{
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px 10px 10px 10px;
 }
-#contact .box h1,
-#contact .box h2,
-#contact .box h3 {
-  color: #fff;
-}
-#contact .box a {
-  color: #999;
-}
-#contact .box a:hover {
-  color: #52b6ec;
-}
-#contact .box input[type="text"],
-#contact .box input[type="email"],
-#contact .box textarea {
-  background-color: #111;
-  border: 0;
-  -webkit-transition: 300ms;
-  -moz-transition: 300ms;
-  -o-transition: 300ms;
-  transition: 300ms;
-}
-#contact .box input[type="text"]:focus,
-#contact .box input[type="email"]:focus,
-#contact .box textarea:focus {
-  background-color: #000;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
+#main-slider p {
+  font-size: 25px;
+  text-shadow: 0 3px rgba(0, 0, 0, 0.1);
+  color: #3e332d;
+  text-align: center;
+  }
+
 
 .positive{
     fill: #4EC2CE;
@@ -311,3 +235,4 @@ width: 80px
   background-color: ;
   color: #060606;
 }
+
