@@ -12,7 +12,8 @@ CHART.settings = {
     colorCriteria: "diff",
     duration: 500,
     title: "Default title",
-    axeYTitle: "Kilo tonne d’équivalent pétrole"
+    axeYTitle: "Kilo tonne d’équivalent pétrole",
+    selectedElement: []
 };
 
 CHART.chart = function(dataset, params) {
@@ -34,7 +35,14 @@ CHART.chart = function(dataset, params) {
         var svg = d3.select(params.containerId).select("#chart");
 
         var barPositionPipeline = function(selection) {
-            selection.attr("class", function(d){return d[params.colorCriteria] < 0 ? "negative" : "positive";})
+            selection.attr("class", function(d, id){
+                    var classes = d[params.colorCriteria] < 0 ? "negative" : "positive";
+
+                    if (params.selectedElement.indexOf(data[id].name) > -1) {
+                        classes += " selected";
+                    }
+                    return classes
+            })
                 .attr("x", function(d){
                         return xScale(d.name);
                     })
@@ -53,7 +61,19 @@ CHART.chart = function(dataset, params) {
             .data(data, key)
             .enter()
             .append("rect")
-            .call(barPositionPipeline);
+            .call(barPositionPipeline)
+            .on('click', function(elt) {
+
+                var index = params.selectedElement.indexOf(elt.name);
+                if (index == -1) {
+                    params.selectedElement.push(elt.name);
+                } else {
+                    params.selectedElement.splice(index, 1);
+                }
+
+                obj.update(params);
+
+            });
 
         svg.selectAll("rect")
             .data(data, key)
@@ -96,6 +116,13 @@ CHART.chart = function(dataset, params) {
                 .attr("dy", 10);
         }
 
+        labels.attr('class', function(name) {
+            var classes = "";
+            if (params.selectedElement.indexOf(name) > -1) {
+                classes = "selected";
+            }
+            return classes;
+        });
 
         function isPositive(i) {
             return data[i][params.displayValue] >= 0.0;
