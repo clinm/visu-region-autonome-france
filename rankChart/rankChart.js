@@ -16,7 +16,7 @@ var margin = {top: 10, right: 1, bottom: 10, left: 10},
     conf = {
         currentYear: "2008",
         comparedValue: "diff",
-        selection: ["LORRAINE", "PICARDIE"]
+        selection: ["LORRAINE"]
     };
 
 // ---------------------------------
@@ -55,9 +55,6 @@ var datasource = d3.json("data.json",function(error,data){
     // build the chart once the data are loaded
     buildRankChart(conf.comparedValue);
 
-    // build TOP
-    makeTOP();
-
     // add colors to lines compare to compared value
     colorizedLines(conf.comparedValue)
 
@@ -76,8 +73,6 @@ function watchThings(){
     conf.watch('currentYear', function(property, oldval, val){
         indexCurrentYear = findIndexYear(val);
 
-        changeCurrentYear(indexCurrentYear);
-
         rectSlide(indexCurrentYear);
         
         return val;
@@ -89,10 +84,6 @@ function watchThings(){
 
         updateRankChart(val)
 
-        makeTOP();
-
-        changeCurrentYear(indexCurrentYear);
-        
         return val;
     })
 
@@ -150,43 +141,6 @@ function setTOPTitle(selector){
     return selector.text(function(year, i){
         return "Classement "+year.year
     })
-}
-
-function setRankText(selector){
-    return selector.text(function(d,i){
-        return "#" + (i+1) + "  " + d.name                
-    })
-}
-
-function changeCurrentYear(iyear){
-    d3.selectAll(".topYear")
-    .selectAll("h2")
-    .data([dataset[iyear]])
-    .call(setTOPTitle)
-
-    d3.selectAll(".topYear")
-    .selectAll("p")
-    .data(dataset[iyear].regions)
-    .call(setRankText)
-
-}
-
-function makeTOP(){
-    var topYear = d3.select("body")
-    .append("div")
-    .classed("topYear", true)
-
-    topYear.selectAll("h2")
-    .data([dataset[indexCurrentYear]])
-    .enter()
-    .append("h2")
-    .call(setTOPTitle)
-
-    topYear.selectAll("p")
-    .data(dataset[indexCurrentYear].regions)
-    .enter()
-    .append("p")
-    .call(setRankText)
 }
 
 // Add color to lines (use Linear gradient)
@@ -558,7 +512,7 @@ function buildRankChart(comparedValue){
         .text(function(key, i){
             return key;})
         .on("click", function(d,i){
-            changeCurrentYear(i)
+            conf.currentYear = d3.select(this).text()
             rectSlide(i);
         })    
     }
