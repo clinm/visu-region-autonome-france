@@ -524,8 +524,12 @@ function buildEndLineHeader(){
     })
     .text(function(d,i){
         return d.name
-    })    
-    }
+    })
+    .on("mouseover", function(d){mouseOver(d.name.replace(/\s/g,''))})
+    .on("mouseout", function(d){mouseOut(d.name.replace(/\s/g,''))})
+    .on("click", function(d){click(d.name)})
+    
+}
 
 //Main function to build Rank chart
 function buildRankChart(comparedValue){
