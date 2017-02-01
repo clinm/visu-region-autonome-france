@@ -9,6 +9,7 @@ CHART.settings = {
     containerId: "#chart-container",
     sorted: false,
     selectedYear: 0,
+    colorCriteria: "diff",
     duration: 500,
     title: "Default title",
     axeYTitle: "Kilo tonne d’équivalent pétrole"
@@ -33,7 +34,7 @@ CHART.chart = function(dataset, params) {
         var svg = d3.select(params.containerId).select("#chart");
 
         var barPositionPipeline = function(selection) {
-            selection.attr("class", function(d){return d[params.displayValue] < 0 ? "negative" : "positive";})
+            selection.attr("class", function(d){return d[params.colorCriteria] < 0 ? "negative" : "positive";})
                 .attr("x", function(d){
                         return xScale(d.name);
                     })
