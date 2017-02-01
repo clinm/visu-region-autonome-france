@@ -17,5 +17,9 @@ jQuery(function($) {
 		var $spy = $(this).scrollspy('refresh')
 	})
 
-	
+	 $(function() {
+        $(".navbar-btn").click(function() {
+          $("#services1").toggle();
+        });
+    });
 });
