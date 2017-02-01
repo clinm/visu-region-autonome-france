@@ -11,7 +11,7 @@ var confRankChart = {
         positiveColor: "rgb(0,255,0)"
 };
 
-function runRankChart(userConf){
+function runRankChart(userConf, callbackChangeYear){
     
     var margin = {top: 10, right: 1, bottom: 10, left: 10},
         width = 700 - margin.left - margin.right,
@@ -22,7 +22,8 @@ function runRankChart(userConf){
         dataset,
         lookup,
         metricwidth,
-        indexCurrentYear;
+        indexCurrentYear,
+        callbackChangeYear = callbackChangeYear;
     
     // ---------------------------------
     // --------------- MAIN ------------
@@ -530,7 +531,9 @@ function buildRankChart(comparedValue){
         .text(function(key, i){
             return key;})
         .on("click", function(d,i){
-            confRankChart.currentYear = d3.select(this).text()
+            var newYear = d3.select(this).text();
+            confRankChart.currentYear = newYear;
+            callbackChangeYear(newYear);
             rectSlide(i);
         })    
     }

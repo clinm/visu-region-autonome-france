@@ -149,7 +149,7 @@
             selection: ["LORRAINE", "ILE DE FRANCE"],
             dataPath: "rankChart/data.json",
             DOMcontainer: "#rank-chart"
-        })
+        }, callbackChangeYear)
         
         $(queries.display_value).on('change', function() {
             confRankChart.comparedValue = $(this).val()
@@ -178,6 +178,14 @@
 
         });
 
+        function callbackChangeYear(newYear){
+            $("#year option").each(function(index, option){
+                if ($(option).text() == newYear)
+                    $("#year").val(index);
+                    $("#year").change();
+            })
+        }
+        
     </script>
 </body>
 </html>
