@@ -3,8 +3,9 @@ var CHART = {};
 CHART.settings = {
     w: 600,
     h: 600,
-    wAxeY: 100,
-    hAxeX: 200,
+    padding: 50,
+    wAxeY: 50,
+    hAxeX: 180,
     containerId: "#chart-container",
     sorted: false,
     selectedYear: 0,
@@ -68,7 +69,7 @@ CHART.chart = function(dataset, params) {
             //Add y-axis
             svg.append("g")
                 .attr("class", "y-axis")
-                .attr("transform", "translate("+ params.wAxeY + ",0)")
+                .attr("transform", "translate("+ (params.wAxeY + params.padding) + ",0)")
                 .call(yAxis);
         }
 
@@ -125,15 +126,15 @@ CHART.chart = function(dataset, params) {
             yRangeBegin = params.h - params.hAxeX;
             yDomain[0] = 0;
         }else {
-            yRangeBegin = params.h;
+            yRangeBegin = params.h + params.padding;
         }
         //Scale function for axes and radius
         yScale = d3.scalePow()
             .domain(yDomain)
-            .range([yRangeBegin, 0]);
+            .range([yRangeBegin, params.padding]);
 
         xScale = d3.scaleBand()
-                .rangeRound([params.wAxeY, params.w])
+                .rangeRound([params.wAxeY + params.padding, params.w + params.padding])
                 .padding(0.1)
                 .domain(data.map(function(d){ return d.name;}));
 
@@ -167,8 +168,10 @@ CHART.chart = function(dataset, params) {
 
     var createChart = function() {
         //Create svg element
+        var padding = 2 * params.padding;
+
         d3.select(params.containerId).append("svg")
-            .attr("width", params.w).attr("height", params.h)
+            .attr("width", params.w + padding).attr("height", params.h + padding)
             .attr("id", "chart");
 
         return this;
