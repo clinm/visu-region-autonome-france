@@ -10,7 +10,8 @@ CHART.settings = {
     sorted: false,
     selectedYear: 0,
     duration: 500,
-    title: "Default title"
+    title: "Default title",
+    axeYTitle: "Kilo tonne d’équivalent pétrole"
 };
 
 CHART.chart = function(dataset, params) {
@@ -144,6 +145,13 @@ CHART.chart = function(dataset, params) {
         yAxis = d3.axisLeft().scale(yScale);
 
         xAxis = d3.axisTop().scale(xScale);
+
+        d3.select(params.containerId)
+            .select(".axe-y-title")
+            .transition()
+            .duration(params.duration)
+            .attr("transform", "translate("+ (params.padding/2) +","+((yRangeBegin + params.padding) / 2) +")rotate(-90)")
+            .text(params.axeYTitle);
     }
 
     function sortChoice(sorted){
@@ -183,7 +191,11 @@ CHART.chart = function(dataset, params) {
 
         d3.select(params.containerId).append("svg")
             .attr("width", params.w + padding).attr("height", params.h + padding)
-            .attr("id", "chart");
+            .attr("id", "chart")
+            .append("text")
+            .classed("axe-y-title", true)
+            .attr("text-anchor", "middle");
+
 
         return this;
     };
