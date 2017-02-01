@@ -1,8 +1,18 @@
-function runRankChart(userConf){
+// ---------------------------------
+// -------- CONFIGURATION ----------
+// ---------------------------------
+var confRankChart = {
+        currentYear: "2008",
+        comparedValue: "diff",
+        selection: [],
+        dataPath: "data.json",
+        DOMcontainer: "body",
+        negativeColor: "rgb(255,0,0)",
+        positiveColor: "rgb(0,255,0)"
+};
 
-    // ---------------------------------
-    // -------- CONFIGURATION ----------
-    // ---------------------------------
+function runRankChart(userConf){
+    
     var margin = {top: 10, right: 1, bottom: 10, left: 10},
         width = 700 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom,
@@ -12,17 +22,8 @@ function runRankChart(userConf){
         dataset,
         lookup,
         metricwidth,
-        indexCurrentYear,
-        conf = {
-            currentYear: "2008",
-            comparedValue: "diff",
-            selection: [],
-            dataPath: "data.json",
-            DOMcontainer: "body",
-            negativeColor: "rgb(255,0,0)",
-            positiveColor: "rgb(0,255,0)"
-        };
-
+        indexCurrentYear;
+    
     // ---------------------------------
     // --------------- MAIN ------------
     // ---------------------------------
@@ -30,19 +31,19 @@ function runRankChart(userConf){
         
         for (var property in userConf) {
             if (userConf.hasOwnProperty(property)) {
-                conf[property] = userConf[property] 
+                confRankChart[property] = userConf[property] 
             }
         }
     }
     
-    var datasource = d3.json(conf.dataPath,function(error,data){
+    var datasource = d3.json(confRankChart.dataPath,function(error,data){
         if (error) return console.warn(error);
         dataset = data;
 
         //Adapt data to visualisation
-        dataset = orderByRank(dataset, conf.comparedValue)
+        dataset = orderByRank(dataset, confRankChart.comparedValue)
 
-        indexCurrentYear = findIndexYear(conf.currentYear);
+        indexCurrentYear = findIndexYear(confRankChart.currentYear);
 
         //TODO Refacto
         //Store regions of the first year
@@ -52,7 +53,7 @@ function runRankChart(userConf){
             var o = {};
             o.metric = rec.name;
             o.data = [];
-            o[conf.comparedValue] = rec[conf.comparedValue]
+            o[confRankChart.comparedValue] = rec[confRankChart.comparedValue]
             lookup.push(o);
         })
 
@@ -65,13 +66,13 @@ function runRankChart(userConf){
 
 
         // build the chart once the data are loaded
-        buildRankChart(conf.comparedValue);
+        buildRankChart(confRankChart.comparedValue);
 
         // add colors to lines compare to compared value
-        colorizedLines(conf.comparedValue)
+        colorizedLines(confRankChart.comparedValue)
 
         //Auto-select from conf
-        conf.selection.forEach(function(val, i){
+        confRankChart.selection.forEach(function(val, i){
             selectRegion(val.replace(/\s/g,''), true)
         })
 
@@ -83,7 +84,7 @@ function runRankChart(userConf){
 // ---------------------------------
 
 function watchThings(){
-    conf.watch('currentYear', function(property, oldval, val){
+    confRankChart.watch('currentYear', function(property, oldval, val){
         indexCurrentYear = findIndexYear(val);
 
         rectSlide(indexCurrentYear);
@@ -91,7 +92,7 @@ function watchThings(){
         return val;
     })
 
-    conf.watch('comparedValue', function(property, oldval, val){
+    confRankChart.watch('comparedValue', function(property, oldval, val){
 
         dataset = orderByRank(dataset, val)
 
@@ -100,7 +101,7 @@ function watchThings(){
         return val;
     })
 
-    conf.watch('selection', function(property, oldarray, array){
+    confRankChart.watch('selection', function(property, oldarray, array){
         lookup.forEach(function(val, i){
             selectRegion(val.metric.replace(/\s/g,''), false)
         })
@@ -166,7 +167,7 @@ function colorizedLines(comparedValue){
     }
 
     //create def node for linear gradient definitions
-    var colorDefs = d3.select(conf.DOMcontainer+" svg.viz")
+    var colorDefs = d3.select(confRankChart.DOMcontainer+" svg.viz")
     .append("defs")
     .selectAll("linearGradient")
     .data(lookup)
@@ -199,7 +200,7 @@ function colorizedLines(comparedValue){
                     else 
                         return false
                         })
-            .call(linearGradient, "0%", conf.negativeColor)
+            .call(linearGradient, "0%", confRankChart.negativeColor)
 
             else
                 colorDefs.filter(function(line, l){
@@ -208,7 +209,7 @@ function colorizedLines(comparedValue){
                         else 
                             return false
                             })
-                .call(linearGradient, "0%", conf.positiveColor)
+                .call(linearGradient, "0%", confRankChart.positiveColor)
                 })
 
     //Create next colors of each line
@@ -233,9 +234,9 @@ function colorizedLines(comparedValue){
                                     return false
                                     })
 
-                        def.call(linearGradient, ((100/(dataset.length-1))*i)-5+"%", conf.positiveColor)
+                        def.call(linearGradient, ((100/(dataset.length-1))*i)-5+"%", confRankChart.positiveColor)
 
-                        def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", conf.negativeColor)
+                        def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", confRankChart.negativeColor)
 
                         regionsWithCurrentDiff[k][comparedValue] = region[comparedValue]
                     }
@@ -249,9 +250,9 @@ function colorizedLines(comparedValue){
                                         return false
                                         })
 
-                            def.call(linearGradient, ((100/(dataset.length-1))*i)-5+"%", conf.negativeColor)
+                            def.call(linearGradient, ((100/(dataset.length-1))*i)-5+"%", confRankChart.negativeColor)
 
-                            def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", conf.positiveColor)
+                            def.call(linearGradient, ((100/(dataset.length-1))*i)+"%", confRankChart.positiveColor)
 
                             regionsWithCurrentDiff[k][comparedValue] = region[comparedValue]
                         }
@@ -265,7 +266,7 @@ function colorizedLines(comparedValue){
 }
 
 function rectSlide(idx){
-    var rect = d3.select(conf.DOMcontainer+" rect");
+    var rect = d3.select(confRankChart.DOMcontainer+" rect");
     rect.transition()
     .attr("x", 10 + (metricwidth * idx));
 }
@@ -274,7 +275,7 @@ function addOrRemoveSelection(region){
     var newSelection = [],
         regionAlreadySelected = false;
     
-    conf.selection.forEach(function(item, i){
+    confRankChart.selection.forEach(function(item, i){
         if (item != region)
             newSelection.push(item)
         else
@@ -284,7 +285,7 @@ function addOrRemoveSelection(region){
     if (!regionAlreadySelected)
         newSelection.push(region)
 
-    conf.selection = newSelection.slice(0)
+    confRankChart.selection = newSelection.slice(0)
 }
 
 function selectRegion(selector, toggle){
@@ -382,7 +383,7 @@ var pathfunction = function(obj){
 }
 
 function buildLineText(comparedValue){
-    var textGroup = d3.select(conf.DOMcontainer+" svg.viz")
+    var textGroup = d3.select(confRankChart.DOMcontainer+" svg.viz")
     .selectAll("textgroup")
     .data(dataset)
     .enter()
@@ -424,7 +425,7 @@ function buildLineText(comparedValue){
 
 function buildLines(){
     // build the lines
-    var paths = d3.select(conf.DOMcontainer+" svg.viz")
+    var paths = d3.select(confRankChart.DOMcontainer+" svg.viz")
     .selectAll("paths")
     // bind lookup to lines
     .data(lookup)
@@ -472,7 +473,7 @@ function assignRankToRegion(comparedValue){
 }
 
 function buildEndLineHeader(){
-    var lineHeader = d3.select(conf.DOMcontainer)
+    var lineHeader = d3.select(confRankChart.DOMcontainer)
     .append("svg")
     .classed("titleHeader", true)
     .selectAll('.lineHeader')
@@ -525,7 +526,7 @@ function buildRankChart(comparedValue){
         .text(function(key, i){
             return key;})
         .on("click", function(d,i){
-            conf.currentYear = d3.select(this).text()
+            confRankChart.currentYear = d3.select(this).text()
             rectSlide(i);
         })    
     }
@@ -545,7 +546,7 @@ function buildRankChart(comparedValue){
     }
 
     function buildLineHeader(){
-        var lineHeader = d3.select(conf.DOMcontainer)
+        var lineHeader = d3.select(confRankChart.DOMcontainer)
         .append("svg")
         .classed("rankHeader", true)
         .selectAll(".rankHeader")
@@ -565,7 +566,7 @@ function buildRankChart(comparedValue){
     }
 
     function createMainSVG(){
-        return d3.select(conf.DOMcontainer)
+        return d3.select(confRankChart.DOMcontainer)
         .append("svg")
         .attr("class","viz")
         .attr("width", width + margin.left + margin.right)
@@ -593,10 +594,10 @@ function buildRankChart(comparedValue){
 function updateRankChart(comparedValue){
 
     //Erase old values
-    d3.selectAll(conf.DOMcontainer+" svg.viz path").remove()
-    d3.selectAll(conf.DOMcontainer+" svg.viz g").remove()
-    d3.selectAll(conf.DOMcontainer+" svg.titleHeader").remove()
-    d3.selectAll(conf.DOMcontainer+" div.topYear").remove()
+    d3.selectAll(confRankChart.DOMcontainer+" svg.viz path").remove()
+    d3.selectAll(confRankChart.DOMcontainer+" svg.viz g").remove()
+    d3.selectAll(confRankChart.DOMcontainer+" svg.titleHeader").remove()
+    d3.selectAll(confRankChart.DOMcontainer+" div.topYear").remove()
 
     assignRankToRegion(comparedValue)
 
