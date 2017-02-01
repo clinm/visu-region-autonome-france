@@ -97,6 +97,10 @@ function watchThings(){
         dataset = orderByRank(dataset, val)
 
         updateRankChart(val)
+        
+        confRankChart.selection.forEach(function(val, i){
+            selectRegion(val.replace(/\s/g,''), true)
+        })
 
         return val;
     })
