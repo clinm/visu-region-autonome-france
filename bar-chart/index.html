@@ -54,6 +54,15 @@
                 conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
 
                 c = CHART.chart(data, conf);
+
+                conf.selectionCallback = function(region, add) {
+                    if (add) {
+                        console.log("Adding " + region);
+                    } else {
+                        console.log("Deleting " + region);
+                    }
+                };
+
                 c.update(conf);
                 c.createSelect("#year");
 

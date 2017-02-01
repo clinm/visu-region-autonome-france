@@ -32,12 +32,18 @@ CHART.chart = function(dataset, params) {
     function toggleSelection(name) {
          var index = params.selectedElement.indexOf(name);
 
+        var actionAdd;
         if (index == -1) {
             params.selectedElement.push(name);
+            actionAdd = true;
         } else {
             params.selectedElement.splice(index, 1);
+            actionAdd = false;
         }
 
+        if (params.selectionCallback) {
+            params.selectionCallback(name, actionAdd);
+        }
     }
 
     function handleBars() {
