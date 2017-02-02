@@ -278,6 +278,9 @@ CHART.chart = function(dataset, params) {
                 .append('option')
                 .attr('value', function(d, i) {return i})
                 .text(function(d) {return d.year});
+
+            $(selectID).val(dataset.length - 1);
+            $(selectID).change();
         }
     };
 
@@ -314,7 +317,7 @@ CHART.bindToDom = function(queries, chart) {
 
     $(queries.sorted).on('change', function() {
         var conf = chart.getConf();
-        conf.sorted = $(this).is(':checked');
+        conf.sorted = !$(this).is(':checked');
         createTitle();
         chart.update(conf);
     });

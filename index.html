@@ -107,7 +107,7 @@
                 <div id="chart-container">
                     <div class="checkbox selectedOnly">
                         <label for="selectedOnly"/>
-                        <input id="selectedOnly" type="checkbox" class="checkbox"/>Ne montrer que les éléments sélectionnés.
+                        <input id="selectedOnly" type="checkbox" class="checkbox" checked/>Ne montrer que les éléments sélectionnés.
                     </div>    
                 </div>
             </div>
@@ -162,10 +162,10 @@
                 conf.h = 400;
                 conf.displayValue = $(queries.comparedValue).val();
                 conf.selectionCallback = callbackChangeSelection;
-                
+                conf.sorted = true;
+                conf.selectedOnly = true;
                 c = CHART.chart(data, conf);
                 c.update(conf);
-                c.createSelect("#year");
 
                 CHART.bindToDom(queries, c);
                 c.update(conf);
@@ -174,6 +174,8 @@
                 confArray.sorted = true;
                 confArray.selectionCallback = callbackChangeSelection;
                 r = RANK_ARRAY.rankArray(data, confArray);
+
+                c.createSelect("#year");
             }
 
         });
