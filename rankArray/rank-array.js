@@ -95,7 +95,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
         data = dataset[params.selectedYear]["regions"].sort(sortChoice(params.sorted));
 
-        var header = ['Rang', 'Région', "Autonome", "Variation"];
+        var header = ['Rang', 'Région', "Autonome", "Variation de l'excédent"];
 
         var table = d3.select(params.containerId)
             .append('table')
