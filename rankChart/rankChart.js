@@ -7,8 +7,8 @@ var confRankChart = {
         selection: [],
         dataPath: "data.json",
         DOMcontainer: "body",
-        negativeColor: "rgb(255,0,0)",
-        positiveColor: "rgb(0,255,0)"
+        negativeColor: "rgb(255,77,59)",
+        positiveColor: "rgb(19,90,178)"
 };
 
 function runRankChart(userConf, callbackChangeYear, callbackChangeSelection){

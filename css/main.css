@@ -129,20 +129,24 @@ width: 80px
 
 
 .positive{
-    fill: #4EC2CE;
-    fill-opacity: 0.8;
-  }
+    fill: rgb(83,125,178);
+}
+.positive:hover{
+    fill: rgb(19,90,178);
+}
 .negative{
-    fill: #C14441;
-    fill-opacity: 0.8;
-  }
+    fill: rgb(255,155,144);
+}
+.negative:hover{
+    fill: rgb(255,77,59);
+}
 
 .negative.selected{
-  fill: #8A302E;
+    fill: rgb(255,77,59);
 }
 
 .positive.selected{
-  fill: #34828A;
+    fill: rgb(19,90,178);
 }
 
 .axis path,
