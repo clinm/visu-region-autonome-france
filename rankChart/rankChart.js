@@ -312,12 +312,18 @@ function selectRegion(selector, toggle){
 
     var line = d3.selectAll('.'+selectorclass+'_line');
     line.classed('line-click', value)
+    line.classed('line-accent', value)
+    line.classed('line-no-accent', !value)
 
     var labels = d3.selectAll('.'+selectorclass+'_text')
     labels.classed('label-click', value)
+    labels.classed('label-accent', value)
+    labels.classed('label-no-accent', !value)
 
     var header = d3.select("."+selectorclass+"_header");
     header.classed('header-click', value)
+    header.classed('header-accent', value)
+    header.classed('header-no-accent', !value)
     
 }
 

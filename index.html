@@ -59,14 +59,6 @@
             <div id= services1 class="first">
                 <form class="form-inline">
                     <div class="row">
-                        <div class="col-md-2 col-md-offset-3">
-                            <div class="checkbox">
-                              <label for="sort">
-                                <input  id="sort" type="checkbox" class="checkbox" name="check" value="sort">
-                                    Trier
-                              </label>
-                            </div>
-                        </div>
                         <div class="col-md-2">
                             <select class="form-control" id="year">
                             </select>
@@ -95,6 +87,22 @@
                                 <input id="consommation" type="radio" class="radio" name="choice" value="cons">
                                     Consommation
                               </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-3">
+                            <div class="checkbox">
+                                <label for="sort">
+                                    <input  id="sort" type="checkbox" class="checkbox" name="check" value="sort">
+                                    Trier Alphabétiquement
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-md-offset-3">
+                            <div class="checkbox">
+                                <label for="selectedOnly"/>
+                                <input id="selectedOnly" type="checkbox" class="checkbox"/>Ne montrer que les éléments sélectionnés.
                             </div>
                         </div>
                     </div>
@@ -145,7 +153,8 @@
         var queries = {
                 display_value: 'input[name="choice"]',
                 sorted: '#sort',
-                years: '#year'
+                years: '#year',
+                selectedOnly: '#selectedOnly'
             },
             selections = [],
             c;
@@ -181,6 +190,7 @@
                 c.createSelect("#year");
 
                 CHART.bindToDom(queries, c);
+                c.update(conf);
             }
 
         });
