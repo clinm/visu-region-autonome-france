@@ -14,7 +14,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
     var mapToRows = function(selection) {
 
-        var columns = ['name'];
+        var columns = ['name', params.displayValue];
 
         return selection.selectAll('td')
             .data(function (row, id) {
@@ -61,7 +61,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
         data = dataset[params.selectedYear]["regions"].sort(sortChoice(params.sorted));
 
-        var header = ['Rang', 'Région'];
+        var header = ['Rang', 'Région', "Valeur"];
 
         var table = d3.select(params.containerId)
             .append('table')
