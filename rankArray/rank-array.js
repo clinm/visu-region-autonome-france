@@ -4,7 +4,8 @@ RANK_ARRAY.settings = {
     containerId: "#rank-array",
     selectedYear: 0,
     displayValue: "diff",
-    sorted: false
+    sorted: false,
+    selectedItems: []
 };
 
 
@@ -45,11 +46,13 @@ RANK_ARRAY.rankArray = function(dataset, params) {
         var rows = table
             .selectAll('tbody')
             .selectAll('tr')
-            .data(data);
+            .data(data)
+            .classed('selected', function(elt) {
+                return params.selectedItems.indexOf(elt.name) > -1;
+            });
 
         mapToRows(rows)
             .call(rowsPipeLine);
-
 
     };
 
@@ -85,7 +88,22 @@ RANK_ARRAY.rankArray = function(dataset, params) {
             .selectAll('tr')
             .data(data)
             .enter()
-            .append('tr');
+            .append('tr')
+            .on('click', function(elt) {
+                $(this).toggleClass('selected');
+                var index = params.selectedItems.indexOf(elt.name);
+                var actionAdd;
+                if (index == -1) {
+                    params.selectedItems.push(elt.name);
+                    actionAdd = true;
+                } else {
+                    params.selectedItems.splice(index, 1);
+                    actionAdd = false;
+                }
+                if (params.selectionCallback) {
+                    params.selectionCallback(elt.name, actionAdd);
+                }
+            });
 
         mapToRows(rows)
             .enter()

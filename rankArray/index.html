@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        .selected {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,7 +30,13 @@
                 console.log(error);
             }else{
                 var conf = $.extend({}, RANK_ARRAY.settings);
-
+                conf.selectionCallback = function(region, add) {
+                    if (add) {
+                        console.log("Adding " + region);
+                    } else {
+                        console.log("Deleting " + region);
+                    }
+                };
                 r = RANK_ARRAY.rankArray(data, conf);
             }
 
