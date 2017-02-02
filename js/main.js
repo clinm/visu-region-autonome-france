@@ -6,6 +6,10 @@ jQuery(function($) {
 	$('.navbar-nav > li.anchor').click(function(event) {
 		//event.preventDefault();
 		var target = $(this).find('>a').prop('hash');
+
+		$('#navbar .active').removeClass('active');
+
+		$(this).addClass('active');
 		$('html, body').animate({
 			scrollTop: $(target).offset().top
 		}, 500);
