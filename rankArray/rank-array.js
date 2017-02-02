@@ -3,7 +3,7 @@ var RANK_ARRAY = {};
 RANK_ARRAY.settings = {
     containerId: "#rank-array",
     selectedYear: 0,
-    displayValue: "diff",
+    displayValue: "prod",
     sorted: true
 };
 
@@ -14,17 +14,13 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
     var mapToRows = function(selection) {
 
-        var columns = ['name', params.displayValue];
+        var columns = ['rank', 'name', params.displayValue];
 
         return selection.selectAll('td')
             .data(function (row, id) {
-
-                var res = columns.map(function (column) {
+                return columns.map(function (column) {
                     return {column: column, value: row[column]};
                 });
-
-                res.unshift({column: "rank", value: id + 1});
-                return res;
             });
     };
 
@@ -34,7 +30,15 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
     var updateArray = function(settings) {
         params = settings;
-        data = dataset[settings.selectedYear]["regions"].sort(sortChoice(params.sorted));
+
+        data = dataset[settings.selectedYear]["regions"].sort(sortChoice(true));
+        for (var i in data) {
+            data[i].rank = parseInt(i) + 1;
+        }
+        // avoid useless sort
+        if (params.sorted = false) {
+            data = dataset[settings.selectedYear]["regions"].sort(sortChoice(false));
+        }
 
         var table = d3.select(params.containerId);
 
