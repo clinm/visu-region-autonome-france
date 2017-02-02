@@ -85,6 +85,13 @@ RANK_ARRAY.rankArray = function(dataset, params) {
         mapToRows(rows)
             .call(rowsPipeLine);
 
+        d3.select(params.containerId)
+        .select("h1")
+        .classed(".rank-array-title", true)
+        .text(function(){
+            return "Classement global "+params.yearTitle;
+        })
+        
     };
 
     function sortChoice(sorted){

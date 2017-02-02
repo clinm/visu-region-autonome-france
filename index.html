@@ -86,9 +86,9 @@
 
     <section id="Classement">
         <div class="box">
-            <h1> Classement global </h1>
+            
             <div id="rank-array" class="container">
-
+                <h1 class="rank-array-title"> Classement global </h1>
             </div>
         </div>
     </section>
@@ -151,6 +151,7 @@
 
             var conf = r.getConf();
             conf.selectedYear = $(this).val();
+            conf.yearTitle = $(queries.years + " option:selected").text()
             r.update(conf);
         });
 
