@@ -15,18 +15,31 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
     var mapToRows = function(selection) {
 
-        var columns = ['rank', 'name', params.displayValue];
+        var columns = ['rank', 'name'];
 
         return selection.selectAll('td')
-            .data(function (row, id) {
-                return columns.map(function (column) {
-                    return {column: column, value: row[column]};
+            .data(function (row) {
+
+                var elts=  columns.map(function (column) {
+                    return {value: row[column]};
                 });
+
+                // handling if glyphicon for status
+                var value;
+                if (row[params.displayValue] >= 0) {
+                    value = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>';
+                } else {
+                    value = '<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>';
+                }
+                elts.push({'value': value});
+
+                return elts;
+
             });
     };
 
     var rowsPipeLine = function(selection) {
-         selection.text(function (d) { return d.value; });
+         selection.html(function (d) { return d.value; });
     };
 
     var updateArray = function(settings) {
