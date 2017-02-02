@@ -67,7 +67,7 @@ width: 80px
 }
 
 #options .comparedValue{
-    width: 135px;
+    width: 160px;
 }
 
 #rank-chart{
@@ -133,12 +133,14 @@ width: 80px
 }
 .positive:hover{
     fill: rgb(19,90,178);
+    cursor: pointer;
 }
 .negative{
     fill: rgb(255,155,144);
 }
 .negative:hover{
     fill: rgb(255,77,59);
+    cursor: pointer;
 }
 
 .negative.selected{
