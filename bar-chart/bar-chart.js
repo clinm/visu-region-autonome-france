@@ -243,9 +243,6 @@ CHART.chart = function(dataset, params) {
 
         var container = d3.select(params.containerId);
 
-        container.append("h1")
-            .text(params.title);
-
         container.append("svg")
             .attr("width", params.w + padding).attr("height", params.h + padding)
             .attr("id", "chart")
