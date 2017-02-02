@@ -129,7 +129,7 @@
         runRankChart({
             currentYear: "1990",
             comparedValue: "diff",
-            dataPath: "rankChart/data.json",
+            dataPath: "datasource/data.json",
             DOMcontainer: "#rank-chart"
         }, callbackChangeYear, callbackChangeSelection)
         
@@ -147,7 +147,7 @@
         });
 
         //Load data and call bar chart function
-        d3.json("bar-chart/diff.json", function(error,data){
+        d3.json("datasource/data.json", function(error,data){
             dataset = data;
             if(error){
                 console.log(error);
