@@ -186,7 +186,7 @@ width: 80px
 #Detail.box {
   padding-bottom: 0;
 }
-##Detail.row > div {
+#Detail.row > div {
   margin-bottom: 20px;
 }
 .center {
@@ -218,11 +218,7 @@ width: 80px
   margin-right: 50px;
   margin-left: 20px;
   width: 100px;
-  height: 5
-
-
-
-  0px;
+  height: 50px;
   background: url(../images/logo.jpg) no-repeat 0 50%;
 
 }
