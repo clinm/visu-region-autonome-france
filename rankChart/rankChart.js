@@ -538,7 +538,7 @@ function buildRankChart(comparedValue){
             return metricwidth * i + linePadding;
         })
         .attr("y", function(key, i){
-            return 30;
+            return 25;
         })
         .text(function(key, i){
             return key;})
