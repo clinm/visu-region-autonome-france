@@ -25,12 +25,26 @@ RANK_ARRAY.rankArray = function(dataset, params) {
                 });
 
                 // handling if glyphicon for status
-                var value;
+                var classes;
                 if (row[params.displayValue] >= 0) {
-                    value = '<span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>';
+                    classes = 'glyphicon-ok text-success';
                 } else {
-                    value = '<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>';
+                    classes = 'glyphicon-ok text-danger';
                 }
+
+                var value = '<span class="glyphicon '+ classes +'" aria-hidden="true"></span>';
+                elts.push({'value': value});
+                // handling variation
+
+                if (row['variation'] > 0) {
+                    classes = 'glyphicon-arrow-up text-success';
+                } else if (row['variation'] == 0) {
+                    classes = 'glyphicon-arrow-right text-info';
+                } else {
+                    classes = 'glyphicon-arrow-down text-danger';
+                }
+                value = '<span class="glyphicon '+ classes +'" aria-hidden="true"></span>';
+
                 elts.push({'value': value});
 
                 return elts;
@@ -81,7 +95,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
         data = dataset[params.selectedYear]["regions"].sort(sortChoice(params.sorted));
 
-        var header = ['Rang', 'Région', "Valeur"];
+        var header = ['Rang', 'Région', "Autonome", "Variation"];
 
         var table = d3.select(params.containerId)
             .append('table')
