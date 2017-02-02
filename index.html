@@ -40,12 +40,12 @@
                         <li class="anchor" ><a href="#Detail">Détails</a></li>
                         <li><a href="Rapport.html">Rapport du projet</a></li>
                     </ul>
-                     <div class="nav pull-right">
-                    <button  type="button" class="btn btn-primary navbar-btn">
-                      <span class="glyphicon glyphicon-minus"></span>
-                     Choisir une option
-                     </button>
-               </div>
+                    <div class="nav pull-right">
+                        <button  type="button" class="btn btn-primary navbar-btn">
+                            <span class="glyphicon glyphicon-minus"></span>
+                            Choisir une option
+                         </button>
+                    </div>
                 </div>
                 
 
@@ -96,6 +96,10 @@
     <section id="Historique">
         <div class="box">
             <h1> Historique</h1>
+            <div class="positiveLegend"></div>
+            <span class="legendText">Excédent positif</span>
+            <div class="negativeLegend"></div>
+            <span class="legendText">Excédent négatif</span>
             <div id="rank-chart">
             </div>
         </div>
@@ -105,23 +109,21 @@
             <div class="box">
                 <div id="chart-container">
                     <h1>Titre de l'histogramme</h1>
-                    <div class="checkbox selectedOnly">
-                        <label for="selectedOnly"/>
-                        <input id="selectedOnly" type="checkbox" class="checkbox" checked/>Ne montrer que les éléments sélectionnés.
+                    <div >
+                        <div class="checkbox selectedOnly">
+                            <label for="selectedOnly">
+                            <input id="selectedOnly" type="checkbox" class="checkbox" checked/>Ne montrer que les éléments sélectionnés.
+                            </label>
+                        </div>
+                        <div class="positiveLegend"></div>
+                        <span class="legendText">Excédent positif</span>
+                        <div class="negativeLegend"></div>
+                        <span class="legendText">Excédent négatif</span>
                     </div>    
                 </div>
             </div>
     </section>
 
-    <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    &copy; 2017 All Rights Reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
     <script>
         var queries = {
                 comparedValue: '#comparedValue',
