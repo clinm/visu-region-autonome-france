@@ -99,7 +99,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
         var table = d3.select(params.containerId)
             .append('table')
-            .classed('table', true);
+            .classed('table-bordered', true);
 
 
         table.append('thead')

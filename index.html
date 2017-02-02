@@ -13,6 +13,7 @@
     <script src="bar-chart/bar-chart.js"></script>
     <script src="rankChart/object-watch.js"></script>
     <script src="rankChart/rankChart.js"></script>
+    <script src="rankArray/rank-array.js"></script>
 
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -24,7 +25,14 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
-    
+    <style>
+        table .selected{
+            font-weight: bold;
+        }
+        #rank-array .table-bordered{
+            margin: 0 auto;
+        }
+    </style>
   
 </head><!--/head-->
 
@@ -87,6 +95,9 @@
     <section id="Classement">
         <div class="box">
             <h1> Classement global </h1>
+            <div id="rank-array" class="container">
+
+            </div>
         </div>
     </section>
 
@@ -127,7 +138,8 @@
                 selectedOnly: '#selectedOnly'
             },
             selections = [],
-            c;
+            c,
+            r;
         
         runRankChart({
             currentYear: "1990",
@@ -142,6 +154,10 @@
 
         $(queries.years).on('change', function() {
             confRankChart.currentYear = $(queries.years + " option:selected").text()
+
+            var conf = r.getConf();
+            conf.selectedYear = $(this).val();
+            r.update(conf);
         });
 
         //Load data and call bar chart function
@@ -161,8 +177,20 @@
 
                 CHART.bindToDom(queries, c);
                 c.update(conf);
+
+                var confArray = $.extend({}, RANK_ARRAY.settings);
+                confArray.sorted = true;
+                confArray.selectionCallback = callbackChangeSelection;
+                r = RANK_ARRAY.rankArray(data, confArray);
             }
 
+        });
+
+        $(queries.sorted).on('change', function() {
+            var conf = r.getConf();
+            conf.sorted = !($(this).is(':checked'));
+
+            r.update(conf);
         });
 
         function callbackChangeYear(newYear){
@@ -189,6 +217,10 @@
             var newConf = c.getConf();
             newConf.selectedElement = confRankChart.selection;
             c.update(newConf);
+
+            var arrayConf = r.getConf();
+            arrayConf.selectedItems = selections.slice(0);
+            r.update(arrayConf);
         }
         
     </script>
