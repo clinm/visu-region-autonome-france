@@ -13,7 +13,8 @@ CHART.settings = {
     duration: 500,
     title: "Default title",
     axeYTitle: "Kilo tonne d’équivalent pétrole",
-    selectedElement: []
+    selectedElement: [],
+    displaySelectedOnly: false
 };
 
 CHART.chart = function(dataset, params) {
@@ -27,6 +28,23 @@ CHART.chart = function(dataset, params) {
     var yAxis;
 
     var data;
+
+    function toggleSelection(name) {
+         var index = params.selectedElement.indexOf(name);
+
+        var actionAdd;
+        if (index == -1) {
+            params.selectedElement.push(name);
+            actionAdd = true;
+        } else {
+            params.selectedElement.splice(index, 1);
+            actionAdd = false;
+        }
+
+        if (params.selectionCallback) {
+            params.selectionCallback(name, actionAdd);
+        }
+    }
 
     function handleBars() {
         //Define key function
@@ -56,28 +74,21 @@ CHART.chart = function(dataset, params) {
                 });
         };
 
+        var bars = svg.selectAll("rect")
+                    .data(data, key);
 
-        svg.selectAll("rect")
-            .data(data, key)
-            .enter()
+        bars.enter()
             .append("rect")
             .call(barPositionPipeline)
             .on('click', function(elt) {
-
-                var index = params.selectedElement.indexOf(elt.name);
-                if (index == -1) {
-                    params.selectedElement.push(elt.name);
-                } else {
-                    params.selectedElement.splice(index, 1);
-                }
-
+                toggleSelection(elt.name);
                 obj.update(params);
-
             });
 
-        svg.selectAll("rect")
-            .data(data, key)
-            .transition()
+        bars.exit()
+            .remove();
+
+        bars.transition()
             .duration(params.duration)
             .call(barPositionPipeline);
 
@@ -98,23 +109,23 @@ CHART.chart = function(dataset, params) {
 
         var xAxisDom = svg.select(".x-axis");
         var labels;
-        if (xAxisDom.size()) {
-            labels = xAxisDom
-                .attr("transform", "translate(0, "+ yScale(0) + ")")
-                .transition()
-                .duration(params.duration)
-                .call(xAxis)
-                .selectAll("text");
-        } else {
-            labels = svg.append("g")
-                .attr("class", "x-axis")
-                .attr("transform", "translate(0, "+ yScale(0) + ")")
-                .call(xAxis)
-                .selectAll("text")
-                .style("alignment-baseline", "middle")
-                .attr("transform", "rotate(-90)")
-                .attr("dy", 10);
-        }
+
+        labels = xAxisDom
+            .attr("transform", "translate(0, "+ yScale(0) + ")")
+
+            .transition()
+            .duration(params.duration)
+            .call(xAxis)
+            .selectAll("text")
+            .style("alignment-baseline", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("dy", "10");
+
+        xAxisDom.selectAll("text")
+            .on('click', function() {
+                toggleSelection($(this).text());
+                obj.update(params);
+            });
 
         labels.attr('class', function(name) {
             var classes = "";
@@ -125,15 +136,20 @@ CHART.chart = function(dataset, params) {
         });
 
         function isPositive(i) {
-            return data[i][params.displayValue] >= 0.0;
+            for (var elt in data) {
+                if (data[elt].name == i) {
+                    return data[elt][params.displayValue] >= 0.0;
+                }
+            }
         }
 
-        labels.filter(function(d, i) { return isPositive(i)})
+        labels.filter(function(d) {
+            return isPositive(d);
+        })
             .style("text-anchor", "end")
             .attr("dx", -10);
 
-
-        labels.filter(function(d, i) { return !isPositive(i); })
+        labels.filter(function(d) { return !isPositive(d); })
             .style("text-anchor", "start")
             .attr("dx", 10);
     }
@@ -199,6 +215,14 @@ CHART.chart = function(dataset, params) {
 
         data = dataset[settings.selectedYear]["regions"].sort(sortChoice(settings.sorted));
 
+        if (params.selectedElement.length) {
+            if (params.selectedOnly) {
+                data = data.filter(function(elt) {
+                    return params.selectedElement.indexOf(elt.name) > -1;
+                });
+            }
+        }
+
         updateAxisScale();
 
         handleBars();
@@ -217,17 +241,22 @@ CHART.chart = function(dataset, params) {
         //Create svg element
         var padding = 2 * params.padding;
 
-        d3.select(params.containerId)
-            .append("h1")
+        var container = d3.select(params.containerId);
+
+        container.append("h1")
             .text(params.title);
 
-        d3.select(params.containerId).append("svg")
+        container.append("svg")
             .attr("width", params.w + padding).attr("height", params.h + padding)
             .attr("id", "chart")
             .append("text")
             .classed("axe-y-title", true)
             .attr("text-anchor", "middle");
 
+
+        container.select("#chart")
+            .append("g")
+            .attr("class", "x-axis");
 
         return this;
     };
@@ -286,6 +315,13 @@ CHART.bindToDom = function(queries, chart) {
     $(queries.sorted).on('change', function() {
         var conf = chart.getConf();
         conf.sorted = $(this).is(':checked');
+        createTitle();
+        chart.update(conf);
+    });
+
+    $(queries.selectedOnly).on('change', function() {
+        var conf = chart.getConf();
+        conf.selectedOnly = $(this).is(':checked');
         createTitle();
         chart.update(conf);
     });

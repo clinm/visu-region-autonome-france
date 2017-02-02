@@ -21,6 +21,11 @@
             <label for="sorting">Sort by percent change</label>
         </li>
         <li>
+            <input id="selectedOnly" type="checkbox" class="checkbox" name="selectedOnly" value="selectedOnly">
+            <label for="selectedOnly">Display selected only</label>
+        </li>
+
+        <li>
             <select name="year" id="year"></select>
         </li>
     </div>
@@ -49,12 +54,22 @@
                 conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
 
                 c = CHART.chart(data, conf);
+
+                conf.selectionCallback = function(region, add) {
+                    if (add) {
+                        console.log("Adding " + region);
+                    } else {
+                        console.log("Deleting " + region);
+                    }
+                };
+
                 c.update(conf);
                 c.createSelect("#year");
 
                 var queries = {
                     display_value: 'input[name="choice"]',
-                    sorted: '.checkbox',
+                    sorted: '#sorting',
+                    selectedOnly: '#selectedOnly',
                     years: '#year'
                 };
 
