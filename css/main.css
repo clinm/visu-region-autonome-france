@@ -179,6 +179,14 @@ width: 80px
   background: #f3f3f3;
 }
 
+#intro{
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align:justify;
+  background-color: #fff;
+}
 #Historique .box {
   background-color: #f9f9f9;
 }
