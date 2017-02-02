@@ -15,7 +15,7 @@ function runRankChart(userConf, callbackChangeYear, callbackChangeSelection){
     
     var margin = {top: 10, right: 1, bottom: 10, left: 10},
         width = 700 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom,
+        height = 550 - margin.top - margin.bottom,
         header = 20,
         innerheight = height - header,
         linePadding = 20,
