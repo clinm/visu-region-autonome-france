@@ -36,14 +36,18 @@ RANK_ARRAY.rankArray = function(dataset, params) {
                 elts.push({'value': value});
                 // handling variation
 
+                var dVar = '';
                 if (row['variation'] > 0) {
                     classes = 'glyphicon-arrow-up text-success';
+                    dVar = '+';
                 } else if (row['variation'] == 0) {
                     classes = 'glyphicon-arrow-right text-info';
                 } else {
                     classes = 'glyphicon-arrow-down text-danger';
                 }
-                value = '<span class="glyphicon '+ classes +'" aria-hidden="true"></span>';
+                value = '<span class="variation"><span class="glyphicon '+ classes +'" aria-hidden="true"></span>';
+
+                value += '<span>' + dVar + row['variation'] + '</span></span>';
 
                 elts.push({'value': value});
 

@@ -331,3 +331,14 @@ border: 10px;
     margin-top: 11px;
     margin-bottom: 11px;
 }
+
+table .variation {
+    display: block;
+    width: 70px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+table .variation .glyphicon{
+    margin-right: 5px;
+}
