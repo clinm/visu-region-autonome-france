@@ -193,6 +193,12 @@ width: 80px
   text-align: center;
 }
 
+.nav.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
 .navbar-default {
   background: #fff;
   border-radius: 0 0 2px 2px;
@@ -203,7 +209,7 @@ width: 80px
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.2);
   overflow: hidden;
   height: 55px;
-  width:1140px;
+    display: flex;
 }
 .navbar-default .first a {
   border-radius: 0 0 0 5px;
@@ -220,6 +226,16 @@ width: 80px
   background: url(../images/logo.jpg) no-repeat 0 50%;
 
 }
+
+.navbar-default .navbar-collapse {
+    display: flex;
+    width: 100%;
+}
+
+.navbar-default .navbar-collapse .navbar-nav{
+    flex-grow: 1;
+}
+
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
 }
@@ -230,10 +246,11 @@ background-color: #fff;
 border: 10px;
 }
 .navbar-default .navbar-nav > li > a {
-  padding: 18px 40px;
+  padding: 0 10px;
   font-size: 18px;
-  line-height: 18px;
+  line-height: 54px;
   color: #999;
+  height: 100%;
 }
 .navbar-default .navbar-nav > li > a > i {
   display: inline-block;
