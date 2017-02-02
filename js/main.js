@@ -19,7 +19,7 @@ jQuery(function($) {
 
 	 $(function() {
         $(".navbar-btn").click(function() {
-          $("#services1").toggle();
+          $("#options").toggle();
         });
     });
 });
