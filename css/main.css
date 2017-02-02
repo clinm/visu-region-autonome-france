@@ -75,7 +75,7 @@ width: 80px
 }
 
 #main-slider {
-  background-image: url(../images/energie.jpeg);
+  background-image: url(../images/preview.jpg);
   
   background-size: cover;
   background-position: 50% 50%;
@@ -94,7 +94,7 @@ width: 80px
 
 }
 .carousel-content{
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px 10px 10px 10px;
 }
 #main-slider p {
@@ -138,17 +138,18 @@ width: 80px
 }
 
 #chart-container{
-    margin-top: -100px;
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .box {
-  padding: 100px 25px;
+  padding: 50px 25px;
   background: #fff;
   border-bottom: 1px solid #e9e9e9;
   position: relative;
+  text-align: center;
 }
 .first {
   margin-top: -40px;
@@ -169,7 +170,7 @@ width: 80px
   margin-bottom: 30px;
   font-size: 48px;
 }
-#Classement.box {
+#Classement {
   background: #f3f3f3;
 }
 
@@ -206,15 +207,25 @@ width: 80px
   margin-right: 50px;
   margin-left: 20px;
   width: 100px;
-  height: 60px;
+  height: 5
+
+
+
+  0px;
   background: url(../images/logo.jpg) no-repeat 0 50%;
 
 }
 .navbar-default .navbar-nav > li {
   margin-left: 1px;
 }
+.introbox{
+margin-left: 10px;
+margin-right: 10px;
+background-color: #fff;
+border: 10px;
+}
 .navbar-default .navbar-nav > li > a {
-  padding: 23px 40px;
+  padding: 18px 40px;
   font-size: 18px;
   line-height: 18px;
   color: #999;
@@ -236,3 +247,8 @@ width: 80px
   color: #060606;
 }
 
+
+.navbar-btn {
+    margin-top: 11px;
+    margin-bottom: 11px;
+}
