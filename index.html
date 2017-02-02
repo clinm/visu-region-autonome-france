@@ -25,14 +25,6 @@
         <script src="js/html5shiv.js"></script>
         <script src="js/respond.min.js"></script>
     <![endif]-->
-    <style>
-        table .selected{
-            font-weight: bold;
-        }
-        #rank-array .table-bordered{
-            margin: 0 auto;
-        }
-    </style>
   
 </head><!--/head-->
 
@@ -68,7 +60,7 @@
                     A la date de 
                     <select class="form-control" id="year">
                     </select>, en comparant par rapport à  
-                    <select id="comparedValue">
+                    <select id="comparedValue" class="form-control comparedValue">
                         <option value="diff">l'excédent</option>
                         <option value="prod">la production</option>
                         <option value="cons">la consommation</option>

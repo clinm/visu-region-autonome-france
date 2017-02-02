@@ -66,9 +66,31 @@ width: 80px
   z-index: 9;
 }
 
+#options .comparedValue{
+    width: 135px;
+}
+
 #rank-chart{
     display: flex;
     justify-content: center;
+}
+
+#rank-array table .selected{
+    font-weight: bold;
+}
+#rank-array .table-bordered{
+    margin: 0 auto;
+    color: black;
+}
+
+#rank-array .table-bordered th{
+    text-align: center;
+    padding: 0px 10px;
+}
+
+#rank-array .table-bordered tbody tr:hover{
+    cursor: pointer;
+    background-color: #e9e9e9;
 }
 
 .form-control{
@@ -260,7 +282,6 @@ border: 10px;
 .navbar-default .navbar-nav > li.active:hover > a:focus,
 .navbar-default .navbar-nav > li:hover > a:focus,
 .navbar-default .navbar-nav > li:focus > a:focus {
-  background-color: ;
   color: #060606;
 }
 
