@@ -305,9 +305,9 @@ CHART.bindToDom = function(queries, chart) {
 
     createTitle();
 
-    $(queries.display_value).on('change', function() {
+    $(queries.comparedValue).on('change', function() {
         var conf = chart.getConf();
-        conf.displayValue = $(this).attr('value');
+        conf.displayValue = $(this).val();
         createTitle();
         chart.update(conf);
     });

@@ -60,18 +60,11 @@
                     A la date de 
                     <select class="form-control" id="year">
                     </select>, en comparant par rapport à  
-                    <label for="diff">
-                        <input id="diff" type="radio" class="radio" name="choice" value="diff" checked>
-                        l'excédent
-                    </label>
-                    <label for="production">
-                        <input  id="production" type="radio" class="radio" name="choice" value="prod">
-                        la production
-                    </label>
-                    <label for="consommation">
-                        <input id="consommation" type="radio" class="radio" name="choice" value="cons">
-                        la consommation
-                    </label>
+                    <select id="comparedValue">
+                        <option value="diff">l'excédent</option>
+                        <option value="prod">la production</option>
+                        <option value="cons">la consommation</option>
+                    </select>
                     , et en triant
                     <label for="sort">
                         <input  id="sort" type="checkbox" class="checkbox" name="check" value="sort">
@@ -128,7 +121,7 @@
     </footer>
     <script>
         var queries = {
-                display_value: 'input[name="choice"]',
+                comparedValue: '#comparedValue',
                 sorted: '#sort',
                 years: '#year',
                 selectedOnly: '#selectedOnly'
@@ -143,7 +136,7 @@
             DOMcontainer: "#rank-chart"
         }, callbackChangeYear, callbackChangeSelection)
         
-        $(queries.display_value).on('change', function() {
+        $(queries.comparedValue).on('change', function() {
             confRankChart.comparedValue = $(this).val()
         });
 
@@ -159,7 +152,7 @@
             }else{
                 var conf = $.extend({}, CHART.settings);
                 conf.h = 400;
-                conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
+                conf.displayValue = $(queries.comparedValue).val();
                 conf.selectionCallback = callbackChangeSelection;
                 
                 c = CHART.chart(data, conf);
