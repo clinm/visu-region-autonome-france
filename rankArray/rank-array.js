@@ -3,8 +3,8 @@ var RANK_ARRAY = {};
 RANK_ARRAY.settings = {
     containerId: "#rank-array",
     selectedYear: 0,
-    displayValue: "prod",
-    sorted: true
+    displayValue: "diff",
+    sorted: false
 };
 
 
@@ -36,7 +36,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
             data[i].rank = parseInt(i) + 1;
         }
         // avoid useless sort
-        if (params.sorted = false) {
+        if (params.sorted == false) {
             data = dataset[settings.selectedYear]["regions"].sort(sortChoice(false));
         }
 
