@@ -29,7 +29,7 @@ RANK_ARRAY.rankArray = function(dataset, params) {
                 if (row[params.displayValue] >= 0) {
                     classes = 'glyphicon-ok text-success';
                 } else {
-                    classes = 'glyphicon-ok text-danger';
+                    classes = 'glyphicon-remove text-danger';
                 }
 
                 var value = '<span class="glyphicon '+ classes +'" aria-hidden="true"></span>';
