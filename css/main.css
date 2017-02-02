@@ -214,15 +214,6 @@ width: 80px
 .navbar-default .first a {
   border-radius: 0 0 0 5px;
 }
-.navbar-default .navbar-brand {
-  margin-right: 50px;
-  margin-left: 20px;
-  width: 100px;
-  height: 50px;
-  background: url(../images/logo.jpg) no-repeat 0 50%;
-
-}
-
 .navbar-default .navbar-collapse {
     display: flex;
     width: 100%;
