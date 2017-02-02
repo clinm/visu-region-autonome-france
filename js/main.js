@@ -19,11 +19,13 @@ jQuery(function($) {
 	//scrollspy
 	$('[data-spy="scroll"]').each(function () {
 		var $spy = $(this).scrollspy('refresh')
-	})
+	});
 
 	 $(function() {
         $(".navbar-btn").click(function() {
-          $("#options").toggle();
+          	$("#options").toggle();
+			$(".navbar-btn .glyphicon").toggleClass("glyphicon-plus")
+				.toggleClass("glyphicon-minus");
         });
     });
 });
