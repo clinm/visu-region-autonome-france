@@ -147,7 +147,8 @@
                 sorted: '#sort',
                 years: '#year'
             },
-            selections = [];
+            selections = [],
+            c;
         
         runRankChart({
             currentYear: "1990",
@@ -173,7 +174,8 @@
                 var conf = $.extend({}, CHART.settings);
                 conf.h = 400;
                 conf.displayValue = d3.select('input[name="choice"]:checked').attr('value');
-
+                conf.selectionCallback = callbackChangeSelection;
+                
                 c = CHART.chart(data, conf);
                 c.update(conf);
                 c.createSelect("#year");
@@ -203,7 +205,10 @@
             }
             
             confRankChart.selection = selections.slice(0);
-            //TODO call change in bar chart
+            
+            var newConf = c.getConf();
+            newConf.selectedElement = confRankChart.selection;
+            c.update(newConf);
         }
         
     </script>
