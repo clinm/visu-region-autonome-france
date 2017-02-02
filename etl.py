@@ -86,9 +86,9 @@ def transform(data_prod, data_conso):
     for region in years[0]['regions']:
         region['variation'] = 0
 
-    for year in years[1:]:
+    for year_id, year in enumerate(years[1:]):
         for id, region in enumerate(year['regions']):
-            region['variation'] = region['diff'] - year['regions'][id - 1]['diff']
+            region['variation'] = region['diff'] - years[year_id]['regions'][id]['diff']
 
     return years
 
