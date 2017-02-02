@@ -3,7 +3,7 @@ var RANK_ARRAY = {};
 RANK_ARRAY.settings = {
     containerId: "#rank-array",
     selectedYear: 0,
-    comparedValue: "diff",
+    displayValue: "diff",
     sorted: true
 };
 
@@ -11,10 +11,6 @@ RANK_ARRAY.settings = {
 RANK_ARRAY.rankArray = function(dataset, params) {
 
     var data;
-
-    var sortedDataset;
-
-    var currentDataset;
 
     var mapToRows = function(selection) {
 
@@ -38,48 +34,32 @@ RANK_ARRAY.rankArray = function(dataset, params) {
 
     var updateArray = function(settings) {
         params = settings;
-        pickDataset();
-
-        data = currentDataset[params.selectedYear].regions;
+        data = dataset[settings.selectedYear]["regions"].sort(sortChoice(params.sorted));
 
         var table = d3.select(params.containerId);
 
-        var rows = table.append('tbody')
+        var rows = table
+            .selectAll('tbody')
             .selectAll('tr')
             .data(data);
 
-        mapToRows(rows).call(rowsPipeLine);
+        mapToRows(rows)
+            .call(rowsPipeLine);
 
 
     };
 
-    var pickDataset = function() {
-        if (params.sorted) {
-            console.log("sorted");
-            currentDataset = sortedDataset;
+    function sortChoice(sorted){
+        if (sorted) {
+            return function(a,b){return b[params.displayValue] - a[params.displayValue];};
         } else {
-            console.log("dataset");
-            currentDataset = dataset;
+            return function(a,b){return d3.ascending(a.name, b.name);};
         }
-    };
-
-    // Duplicate rankChart
-    function orderByRank(data, comparedValue){
-        JSON.parse(JSON.stringify(nodesArray)).forEach(function(oneYear){
-            oneYear.regions.sort(function(a, b){
-                return b[comparedValue] - a[comparedValue];
-            })
-        });
-        return data;
     }
 
     var createArray = function() {
-        //TODO remove side effect when sorting
-        sortedDataset = orderByRank(dataset, params.comparedValue);
 
-        pickDataset();
-
-        data = currentDataset[params.selectedYear].regions;
+        data = dataset[params.selectedYear]["regions"].sort(sortChoice(params.sorted));
 
         var header = ['Rang', 'Région'];
 
