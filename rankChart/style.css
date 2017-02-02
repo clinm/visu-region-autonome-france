@@ -1,7 +1,3 @@
-.viz{
-    
-}
-
 .titleHeader{
     min-width: 185px;
     max-width: 185px;
@@ -59,13 +55,4 @@
 
 .header-accent, .header-click {
     font-weight: bold;
-}
-
-.topYear {
-    border: 1px solid black;
-    line-height: 6px;
-    font-size: 12px;
-    max-height: fit-content;
-    min-width: fit-content;
-    align-self: center;
 }
