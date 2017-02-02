@@ -19,7 +19,6 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
-
     
     <!--[if lt IE 9]>
         <script src="js/html5shiv.js"></script>
@@ -57,58 +56,35 @@
         </div>
     </header>
 
-            <div id= services1 class="first">
-                <form class="form-inline">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <select class="form-control" id="year">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-3">
-                            <div class="checkbox">
-                              <label for="diff">
-                                <input id="diff" type="radio" class="radio" name="choice" value="diff" checked>
-                                    Excédent
-                              </label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="checkbox">
-                              <label for="production">
-                                <input  id="production" type="radio" class="radio" name="choice" value="prod">
-                                    Production
-                              </label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="checkbox">
-                              <label for="consommation">
-                                <input id="consommation" type="radio" class="radio" name="choice" value="cons">
-                                    Consommation
-                              </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-3">
-                            <div class="checkbox">
-                                <label for="sort">
-                                    <input  id="sort" type="checkbox" class="checkbox" name="check" value="sort">
-                                    Trier Alphabétiquement
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-md-offset-3">
-                            <div class="checkbox">
-                                <label for="selectedOnly"/>
-                                <input id="selectedOnly" type="checkbox" class="checkbox"/>Ne montrer que les éléments sélectionnés.
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    <div id="options">
+        <div class="container">
+            <form class="container form-inline first">
+                <div class="row">
+                    A la date de 
+                    <select class="form-control" id="year">
+                    </select>, en comparant par rapport à  
+                    <label for="diff">
+                        <input id="diff" type="radio" class="radio" name="choice" value="diff" checked>
+                        l'excédent
+                    </label>
+                    <label for="production">
+                        <input  id="production" type="radio" class="radio" name="choice" value="prod">
+                        la production
+                    </label>
+                    <label for="consommation">
+                        <input id="consommation" type="radio" class="radio" name="choice" value="cons">
+                        la consommation
+                    </label>
+                    , et en triant
+                    <label for="sort">
+                        <input  id="sort" type="checkbox" class="checkbox" name="check" value="sort">
+                        alphabétiquement
+                    </label>
+                    .
+                </div>
+            </form>
+        </div>
+    </div>
     <section id="main-slider" class="carousel">
         <div class="container">
                     <div class="carousel-content">
@@ -136,7 +112,10 @@
     <section id="Detail">
             <div class="box">
                 <div id="chart-container">
-
+                    <div class="checkbox selectedOnly">
+                        <label for="selectedOnly"/>
+                        <input id="selectedOnly" type="checkbox" class="checkbox"/>Ne montrer que les éléments sélectionnés.
+                    </div>    
                 </div>
             </div>
     </section>
